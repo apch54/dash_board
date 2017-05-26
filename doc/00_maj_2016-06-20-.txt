@@ -1,0 +1,33 @@
+201606-20
+help menu dynamique
+correction bug logs
+
+2016-06-17
+bilan =on : choix d'affichage du bilan au niveau de l'url
+smooth-scroll
+
+2016-06-11
+correction bug :
+recadrage du tableau quand on ferme les modifs
+crv ou bid
+
+2016-06-10
+optimisation xy = off
+
+2016-06-09
+url?xy = off
+factorisation ds php 04 10 et 11
+changegements couleurs.js
+
+2016-06-06
+URL logs=on permet d'afficher ts les logs ; les donneés
+brutes des bases de données
+
+2016-05-27
+affichge des crv des bid et 
+la possibilité conjointe des deux affichages
+
+2016-05-12
+préparation intégration xy des modifs conjointes 
+cvr et bid
+

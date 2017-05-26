@@ -1,0 +1,336 @@
+<!-- ##### -->
+<!--  menu, affichage des filtres fixe en haut de la page  -->
+<!--  2015-11-15
+<!-- ##### -->
+
+<!--
+TODO pour remettre l'ouverture du menu remmetre ces deux lignes juste en dessous
+ng-cmouse enter ="well_mouse_enter()"
+ng-mouseleave="well_mouse_leave()"
+ng-click="well_click()"
+-->
+<!-- changer le nom de la fonction well_mouse_enter()-->
+<div class="container-fluid" style="margin: 0 0 -15px 0"
+     ng-cloak
+>
+    <!-- titre du  menu   -->
+
+    <div id="menu_titre" class="row mp0"> <!-- appel de la base de rechange -->
+
+        <div id="id_lst_ver_working" class="col-sm-3 mp0">
+            <!-- inscription de l' href de la base de rechange si elle existe -->
+            <?php echo saved_folder(); ?>
+
+            <!-- ici on est en bootstap , le titre ne peut pas être une variable-->
+            <a id="id_hlp_mnu" href="#"
+               data-html="true"
+               data-toggle="popover"
+               data-title="Options dépendantes de l'URL."
+               data-placement="bottom-right"
+               data-content="{{M_help.menu.content}}"
+            >
+                <ng-md-icon icon="help" class="icon"></ng-md-icon>
+            </a>
+        </div>
+
+        <div class="col-sm-7 mp0 center_div">
+            <section>
+                <div id="id_titre_date">
+                    <a href="#" ng-click="change_2_dates()">
+                        <h2 class="h1_ttl {{coul_2(0.01, 1000, sum_global('Marge'))}}">
+                            {{dates}} [{{titre_menu_base()}}] <!-- affichage de la base -->
+                        </h2>
+                    </a>
+                </div>
+
+
+                <form id="id_dv_dp" name="radio_dv_ou_dp" ng-click="change_dv()">
+                    <input type="radio" ng-model="rdio_dv" value="v" ng-focus="set_cursor('wait')">dv
+                    <input type="radio" ng-model="rdio_dv" value="p" ng-focus="set_cursor('wait')">dp
+                    <input type="radio" ng-model="rdio_dv" value="w" ng-focus="set_cursor('wait')">w
+                    <input type="radio" ng-model="rdio_dv" value="m" ng-focus="set_cursor('wait')">m
+                    <input type="radio" ng-model="rdio_dv" value="o" ng-focus="set_cursor('wait')">o
+                    <input type="radio" ng-model="rdio_dv" value="at" ng-focus="set_cursor('wait')">at
+
+                </form>
+
+            </section>
+        </div>
+
+        <div id="id_to_reduced" class="col-sm-1 mp0">
+            <a ng_href="light.php?parametre={{rdio_dv}}"
+               target="_blank">Dash-b. réduit
+            </a>
+        </div>
+
+        <div id="id_icon_menu" class="col-sm-1 mp0">
+            <a ng-hide="show_menu"
+               href="" ng-click="menu_on_off('visible')"
+            >
+                <ng-md-icon icon="file_download" class="icon"></ng-md-icon>
+            </a>
+
+            <a ng-show="show_menu"
+               href="" ng-click="menu_on_off('hidden')"
+            >
+                <ng-md-icon icon="file_upload" class="icon"></ng-md-icon>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- ##### -->
+    <!--  corps du menu  -->
+    <!-- ##### -->
+
+    <div class="row  menu-show-hide center_div mp0" ng-cloak ng-show="show_menu">
+
+        <!--chk : colonne de gauche, les checks boxes * -->
+
+        <div id="id_menu_1" class="col-sm-3 mp0 center_div">
+
+            <section ng-model="check_form" ng-cloak>
+
+                <input type="checkbox" ng-model="chk_aff_bilan"
+                       ng-mouseover="change_scope(chk_aff_bilan, 'id_bilan',bzg.bil )"
+                       ng_click="aff_bilan(chk_aff_bilan)" ;
+                       ng-focus="set_cursor('bilan')"
+                > : Bilan <br>
+
+                <input type="checkbox" ng-model="chk_aff_gain_0"
+                       ng-mouseover="change_scope(chk_aff_gain_0, 'id_gain_0',bzg.gn0 )"
+                       ng_click=aff_gain_0(chk_aff_gain_0);
+                > : camp. inactives<br>
+
+                <input type="checkbox" ng-model="chk_aff_tableau"
+                       ng-mouseover="change_scope(chk_aff_tableau, 'id_tableau',bzg.tab )"
+                       ng_click=aff_tableau(chk_aff_tableau);
+                > : tableau<br>
+
+                <section ng-show="chk_aff_bilan" class="mp0">
+                    <input type="checkbox" ng-model="chk_aff_graph_lgn"
+                           ng-mouseover="change_scope(chk_aff_graph_lgn, 'graph_lgn',bzg.xy )"
+                           ng_click="aff_graph_lgn(chk_aff_graph_lgn);"
+                           ng-focus="set_cursor('wait')"
+                    > : graphe XY<br>
+                </section>
+
+                <input type="checkbox" ng-model="chk_aff_graph_jeux_regies"
+                       ng_click="aff_graph_jeux_regies(chk_aff_graph_jeux_regies)"
+                       ng-mouseover="change_scope(chk_aff_graph_jeux_regies, 'id_aff_graph_jeux_regies',bzg.jeu )">
+                : jeux, regies<br>
+
+                <input type="checkbox" ng-model="chk_aff_graph_campagnes"
+                       ng_click="aff_campagnes(chk_aff_graph_campagnes)"
+                       ng-mouseover="change_scope(chk_aff_graph_campagnes,'id_aff_graph_campagnes',bzg.cmp )">
+                : campagnes<br>
+
+                <input type="checkbox" ng-model="chk_aff_levier"
+                       ng_click="aff_levier(chk_aff_levier)"
+                       ng-mouseover="change_scope(chk_aff_levier, 'id_levier',bzg.lev )">
+                : tri des jeux par marge
+
+            </section>
+        </div>
+
+        <!--
+        ~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~
+        Filtre qui traite les radios : col 2
+        ~~~~~~~~~~~ _~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~
+        -->
+        <div id="id_menu_2" class="col-sm-2 mp0">
+
+            <input type="radio"
+                   ng-model="rdio_action"
+                   value="70"
+                   ng-focus="set_cursor('filtre'); change_scope(chk_aff_tableau, 'id_tableau',180)"
+                   ng-click="change_70()"
+            >Top 70% <br>
+
+            <input type="radio"
+                   ng-model="rdio_action"
+                   value="-10"
+                   ng-focus="set_cursor('filtre'); change_scope(chk_aff_tableau, 'id_tableau',180)"
+                   ng-click="change_70()"
+            >Marge<-10€ <br>
+
+            <input type="radio"
+                   ng-model="rdio_action"
+                   value="0"
+                   ng-focus="set_cursor('filtre'); change_scope(chk_aff_tableau, 'id_tableau',180)"
+                   ng-click="change_0()"
+            > Marge<0€ <br>
+
+            <input type="radio"
+                   ng-model="rdio_action"
+                   value="700"
+                   ng-focus="set_cursor('filtre'); change_scope(chk_aff_tableau, 'id_tableau',180)"
+                   ng-click="change_700()"
+            > Top 70 & <0<br>
+
+            <input type="radio"
+                   ng-model="rdio_action"
+                   value="raz"
+                   ng-focus="set_cursor('filtre'); change_scope(chk_aff_tableau, 'id_tableau',180)"
+                   ng-click="change_raz()"
+            > Raz
+        </div>
+
+        <!--
+       ~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~
+       Filtre suite de la précédente col : col 3
+       ~~~~~~~~~~~ _~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~
+       -->
+        <div id="id_menu_22" class="col-sm-2 mp0">
+
+            <input type="radio" ng-model="rdio_action"
+                   value="M1000"
+                   ng-focus="set_cursor('filtre')"
+                   ng-click="change_marge_renta()"
+            >M>100 & R<2 <br>
+
+            <!-- traitement cvr < 1 -->
+            <input type="radio"
+                   ng-model="rdio_action"
+                   value="cvr_1"
+                   ng-focus="set_cursor('filtre')"
+                   ng-click="cvr_inf_1()"
+            > cvr<1% <br>
+
+            <!-- traitement cvr < 1 & cpm < 5 -->
+            <input type="radio"
+                   ng-model="rdio_action"
+                   value="cvr_1_&_cpm_5"
+                   ng-focus="set_cursor('filtre')"
+                   ng-click="cvr_cpm()"
+            > cvr<1 & cpm<5 <br>
+
+            <input type="radio" ng-model="rdio_action"
+                   ng-value="TjCPM5"
+                   ng-focus="set_cursor('filtre')"
+                   ng-click="change_tjcpm5()"
+                   ng-disabled="!TJ_exists"
+            >Cpm < 5
+        </div>
+
+        <!--
+        ~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~
+        filtre marge col 4
+        ~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~
+        -->
+
+        <div class="col-sm-5 mp0" ng-cloak>
+
+            <div class="row mp0 height_2">
+
+                <div class="col-sm-6 mp0">
+
+                    <form>
+                        <div class="row mp0">
+
+                            <div class="col-sm-6 mp0 align_right">
+                                <label for="id_marge">Marge > </label> <br>
+                                <label for="id_gain">Gain > </label> <br>
+                                <label for="id_cpm">CPM < </label> <br>
+                                <label for="id_renta">Renta < </label>
+                            </div>
+
+                            <div class="col-sm-6 mp0">
+
+                                <input id="id_marge" type="number"
+                                       ng-model="fMarge"
+                                       ng-change="change_M(); bazinga_tableau();"
+
+                                       placeholder="Sup à"
+                                ><br>
+                                <input id="id_gain" type="number"
+                                       ng-model="fGain"
+                                       ng-change="change_G(); bazinga_tableau();"
+                                       placeholder="Sup à"
+                                ><br>
+                                <input id="id_cpm"
+                                       type="number"
+                                       placeholder="inf à"
+                                       ng-model="fTjCPM"
+                                       ng-change="change_T(); bazinga_tableau()"
+                                       ng-disabled="!TJ_exists"
+                                ><br>
+                                <input id="id_renta"
+                                       type="number"
+                                       placeholder="inf à"
+                                       ng-model="fRenta"
+                                       ng-change="change_R(); bazinga_tableau()"
+                                >
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!--
+                ~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~
+                choix dates   dernière col du menu*
+                ~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~~_~~~~~~~~~~
+                ~-->
+
+                <div id="id_menu_4" class="col-sm-6 mp0" style="line-height:25px ">
+                    <button class="center_div" ng-click="change_2_dates() ; set_cursor('dte')">
+                        Maj
+                    </button>
+                    <br>
+                    <!-- choix dates sélecteur  *-->
+                    <select name="dteSelect" class="dte" ng-model="dte_select"
+                            ng-click="set_cursor('dte')"
+                            ng-change="change_dte_select(dte_select)"
+
+                    >
+                        <option value=""> Choix période</option>
+                        <option value="j"> J : dernière maj</option>
+                        <option value="j-1"> J-1 </option>
+                        <option value="j7"> 7 jours précédents</option>
+                        <option value="j30"> 30 jours précédents</option>
+                        <option value="mois"> Le mois en cours</option>
+                        <option value="mois-1"> Le mois précédent</option>
+                        <option value="tout"> Tout</option>
+
+                    </select><br>
+                    <!-- choix dates, manuel ¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ * -->
+
+                    <section>
+                        <input id="ttl" class="dte" ng-model="date_0" type="date">
+                        <br>
+
+                        <input id="ttl2" class="dte" ng-model="date_2" type="date">
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ##### -->
+    <!--  progress bar cachée  le show est  donné par une instance de Progress_bar    -->
+    <!-- ##### -->
+
+    <div class="row mp0" ng-show="pgs_bar2.show">
+        <div id="id_progress_bar_1" class="col-sm-4 ">&nbsp;</div>
+
+        <div id="id_progress_bar_2" class="col-sm-4 ">&nbsp;
+            <div class="bar"></div>
+            <br><br><!-- {{pgs_bar2.remain}}-->
+
+        </div>
+        <div class="col-sm-4 mp0">&nbsp;</div>
+    </div>
+    <div class="menu_height_XS">
+        <a href="#" ng-click="menu_on_off2()">
+             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        </a>
+    </div>
+</div><!-- fin du menu/ fluid -->
+
+

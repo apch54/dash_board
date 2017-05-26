@@ -1,0 +1,105 @@
+<!--¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ * -->
+<!--affichage des campagne avec  gain = 0  2015-12-17                          -->
+<!--¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ * -->
+
+<!-- un div qui s'ouvre en synchronisme avec le corps du menu : smart
+
+<!--{{win_wh()}}<br>{{bd_gain_0}}-->
+<!-- un scroll fade in ou out -->
+<div    ng-show=" chk_aff_gain_0"
+        class="container-fluid menu-show-hide"
+>
+<br>
+    <!--
+    couleur dynamique données au titre
+    -->
+    <h2 ng-class="{'red': bd_gain_0[0].Camp != ' Aucune ligne à gain nul ', 'blue': bd_gain_0[0].Camp == ' Aucune ligne à gain nul '}"
+        id="id_gain_0_h2"
+    >
+        Table des campagnes inactives (marge <1€) de {{bd_gain_0[0].Date}} à
+        {{bd_gain_0[1].Date}}[{{bd_gain_0[3].Date}}]
+
+    </h2>
+
+    <!--place du lgs : visualisation des  données -->
+    <div class="contenair_log_title">
+        <div class="milieu">
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs:
+                <input type="checkbox" ng-model="logs.chk.gain0">
+            </div>
+        </div>
+    </div>
+    <!-- fin du  log -->
+
+    <div ng-show="logs.chk.gain0">
+        <div class="logs_title_base"> Base : bd_gain_0</div><!-- Nom de la base comme titre-->
+        <div ng-repeat="x12 in bd_gain_0 track by $index"
+             class="align_left" ;
+        >
+            <p ng-class-odd="'odd'" ng-class-even="'even'">
+                {{x12}}
+            </p>
+        </div>
+        <br>
+    </div>
+    <!-- fin aff  log -->
+
+    <section id="id_gain_0_section1">
+        <!--
+            couleur dynamique données au titre
+         -->
+        <table id="id_gain_0_tbl1" ng-style="{'width': tbl_w }">
+
+            <!-- header de table  ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ * -->
+            <tr ng-class="{'bg_m': bd_gain_0[0].Camp !== ' Aucune ligne à gain nul ', 'bg_j': bd_gain_0[0].Camp === ' Aucune ligne à gain nul '}">
+                <th>id</th>
+                <th>Régies</th>
+                <th width="15%">Jeux</th>
+                <th width="25%">Camp.</th>
+                <th> Gain (€)</th>
+                <th> Gain 7j(€)</th>
+                <th> Gain 30j(€)</th>
+                <th> Gain tout(€)</th>
+                <th> Tjclic</th>
+                <th> ($)Tj Cout</th>
+                <th> Marge(€)</th>
+
+            </tr>
+
+            <!--corps de table  ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *-->
+
+            <tr
+                ng-repeat=" t in  bd_gain_0 | limitTo : bd_gain_0_length()"
+            >
+                <td>{{t.idCamp}}</td>
+                <td>{{t.Regie}}</td>
+                <td>{{t.Jeu}}</td>
+                <td>{{t.Camp}}</td>
+                <td ng-class="{'bg_m': bd_gain_0[0].Camp !== ' Aucune ligne à gain nul ', 'bg_j': bd_gain_0[0].Camp === ' Aucune ligne à gain nul '}"
+                    class="{{coul_2(0.1, 1, t.Gain)}}"
+                >{{t.Gain}}
+                </td>
+                <td ng-class="{'bg_m': bd_gain_0[0].Camp !== ' Aucune ligne à gain nul ', 'bg_j': bd_gain_0[0].Camp === ' Aucune ligne à gain nul '}"
+                    class="{{coul_2(0.1, 1, t.Gain_7)}}"
+                >{{t.Gain_7}}
+                </td>
+                <td ng-class="{'bg_m': bd_gain_0[0].Camp !== ' Aucune ligne à gain nul ', 'bg_j': bd_gain_0[0].Camp === ' Aucune ligne à gain nul '}"
+                    class="{{coul_2(0.1, 1, t.Gain_30)}}"
+                >{{t.Gain_30}}
+                </td>
+                <td ng-class="{'bg_m': bd_gain_0[0].Camp !== ' Aucune ligne à gain nul ', 'bg_j': bd_gain_0[0].Camp === ' Aucune ligne à gain nul '}"
+                    class="{{_2(0.1, 1, t.Gain_all)}}"
+                >{{t.Gain_all}}
+                </td>
+                <td class="{{coul_2(0.1, 50, t.TjClic)}}">{{t.TjClic}}</td>
+                <td>{{t.TjCout}}</td>
+                <td class="{{coul_2(0.01, 1, t.Marge)}}">{{t.Marge}}</td>
+            </tr>
+
+        </table><!-- @formatter:on-->
+
+    </section>
+    <br>
+
+</div>

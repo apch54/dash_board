@@ -1,0 +1,35 @@
+<!--
+--------
+Hidden table for clipboard use
+Create by fc on 2016-03-15
+--------
+-->
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+
+<table  ng-show = "show_hidden_table"
+        id="hidden_table"
+        ng-model = "hidden_table"
+        class="hidden_table"
+>
+    <td width ="4.5%" >{{h.idCamp}} </td>
+    <td width ="10%"> {{h.Regie}}</td>
+    <td width ="12%"> {{h.Jeu}}</td>
+    <td width ="9%">  {{h.Camp}}</td>
+    <td width ="6%" class="bg_v"> {{h.TjCPM}}</td>
+    <td width ="4%" class="bg_v"> {{h.Transfo}} </td>
+    <td width ="5.5%" class="bg_v"> {{(h.Transfo/h.TjClic * 100).format(2) }}</td>
+    <td width ="4%" class="bg_v">   {{h.TjBid}}</td>
+    <td width ="5.5%" class="bg_v" class="{{coul_2(200, 500, h.TjClic)}}"> {{h.TjClic}}</td>
+    <td width ="5%" class="bg_v">   {{h.TjCout}}</td>
+
+    <td width ="6%"class="bg_b"> {{h.Gain}}</td>
+    <td width ="5%"class="bg_b"> {{h.CtrLogin}}</td>
+    <td width ="4%"class="bg_b"> {{h.CtrGame}}</td>
+
+    <td width ="5%"class="bg_j" class="{{coul_2(0, 5, x.Marge)}}"> {{h.Marge}}</td>
+    <td width ="5%" class="bg_j" class="{{coul_2(0, .5,  x.Renta*sign(x.Marge))}}"> {{ (h.Marge/(-h.TjCout)*1.2).format(2)  }} </td>
+    <td width ="5.5%"  class="bg_j"> {{(h.Marge/ sum_col('Marge')*100).format(2)}}</td>
+    <td width ="4.5%" class="bg_j" class="{{coul_2(0, 1, x.Val_1_clic)}}"> {{h.Val_1_clic}}</td>
+
+</table>

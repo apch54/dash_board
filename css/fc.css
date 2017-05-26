@@ -1,0 +1,1109 @@
+/* css du dash-bord
+  __
+ / _| ___   ___ ___ ___
+| |_ / __| / __/ __/ __|
+|  _| (__ | (__\__ \__ \
+|_|  \___(_)___|___/___/
+
+
+29-07-2015
+*/
+
+/* -----.-----.-----.-----.------
+fonts
+-- -----.-----.-----.-----.-----
+*/
+@font-face {
+    font-family: page ;
+    src: url('Ubuntu-L.ttf');
+}
+
+@font-face {
+    font-family: bold ;
+    src: url('DroidSerif.ttf');
+}
+
+/* -----.-----.-----.-----.-----
+conventions générales prises par défaut
+-- -----.-----.-----.-----.-----
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: .988em;
+}
+
+body, p, div, span, section {
+    font-family: page, arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: bold, Times, sans-serif;
+    color: #0333ff;
+    /* #2a6496;*/
+    padding: 5px 0 0 0;
+    margin: 0;
+}
+
+h1 {font-size: 2.6em;   line-height: 3em;   }
+h2 {font-size: 1.4em;   line-height: 1.8em; }
+h3 { font-size: 1.1em;  line-height: 1.5em; }
+h4 { font-size: 1em;    }
+h5 { font-size: 0.8em;  }
+h6 { font-size: 0.6em;  }
+
+table, th, tr, td {
+    border: 1px solid grey;
+    padding: 2px;
+    border-collapse: collapse;
+    text-align: center;
+    color: black;
+    vertical-align: middle;
+    /*word-wrap: break-word !important;*/
+}
+
+optGroup{
+    font-size: 1em;
+    color: #0333ff;
+    font-family: bold;
+}
+
+option {
+    color: #000;
+    font-family: page;
+}
+
+input[type=number], select {
+    border-radius: 4px;
+    width: 64px;
+    align: right;
+    line-height: 1.3em;
+    vertical-align: middle;
+    cursor: inherit;
+}
+
+input[type=radio], input[type=checkbox] {
+    margin: 0;
+    padding: 0;
+    width: 2em;
+    line-height: .5em;
+    cursor: inherit;
+}
+
+a:active{  cursor: wait; }
+
+button{
+    background-color: #eeeeee;
+    border-radius: 3px;
+    border-color: #ccd0d3;
+    width: 62px;
+    align: right;
+    line-height: 1.3em;
+    vertical-align: middle;
+    cursor: inherit;
+}
+
+button:active {
+    cursor:wait;
+    color:navy;
+}
+
+.dte, input[type=date] {
+     width: 122px;
+     border-radius: 4px;
+     height: 1.7em;
+     vertical-align: middle;
+     cursor: inherit;
+ }
+.sml_btn {width:35px;} /* mdf et bid*/
+
+/*
+-----.-----.-----.-----.-----
+conventions particulières de classes
+-- -----.-----.-----.-----.---
+*/
+
+/*check du menu en colonne 1*/
+.check-element {
+    padding: 10px;
+    border: 1px solid black;
+    background: white;margin: 10px;align : center;
+}
+
+/* des éléments de style nécessaires ds ts les fichiers*/
+.height_1 { line-height: 1.2em; }
+.height_2 { line-height: 2em    }
+
+.align_right {text-align: right;}
+.align_left  {text-align: left; }
+
+.mp0{ /* no margin */
+    margin: 0;
+    padding: 0 !important ;
+}
+.txt_not_overflow{
+    overflow:         hidden;
+    -o-text-overflow: ellipsis; /* pour Opera 9 */
+    text-overflow:    ellipsis; /* pour le reste du monde */
+}
+
+.table_2{/* table modif dans une table */
+    border: hidden;
+    width: 100%
+}
+
+/*  quelques classes très réduites
+    équivalente à des styles et incorporées ici pour éviter
+    d'incorporer des balises styles dans le code
+*/
+
+.no_border      { border: none;} /* mm table border interne */
+.centrer        { text-align: center !important;}
+.center_div     { margin: 0 auto !important;  } /*dans 02_graph_pie.php et un peu pattout*/
+.z_inherit      { z-index : inherit;} /*dans 02_graph_pie.php*/
+.inline_block   { display: inline-block;}
+.width_3        { width: 3em;} /* dans le fichier 02_graph_pie.html*/
+.line_height_2  { line-height: 2em;} /* dans le fichier 0202_graph_pie.html*/
+.line_height_3  { line-height: 2em;}
+.line_height_25 { line-height: 25px;}
+
+/* utilisé ds 04_bilan pour fixer la hauteur de ligne
+   généralement pour le point d'interrogation help
+*/
+.line_height_18 {
+    line-height: 1.8em;
+}
+
+/*
+affiche le texte selon tous les milieux
+*/
+.milieu{
+    text-align    : center;
+    vertical-align: middle;
+    margin        : -5px auto;
+}
+
+.h1_ttl {
+    line-height: 60px;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* for progressbar*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.top_fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 99%;
+}
+
+/*table cachée pour le remplissage  du clip-board */
+.hidden_table{
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid grey;
+    padding: 0px;
+    border-collapse: collapse;
+    text-align: center;
+    color: black;
+    width: 570px;
+    font-size: 0.75em;
+}
+
+/*  couleur des carctères des tables
+    principalement ds le fichier 05_table.htlm
+*/
+.thtb {
+    color: black;
+}
+
+/*  cale la position des icones de 'Angular*
+*/
+.icon svg{
+    fill: #9f9fbb ;
+    vertical-align : middle;
+    height: 24px;
+    width: 24px;
+}
+
+/*  concerne les mm icones que précédemment
+    traite plus spécialement la couleur des icones d'Angular
+*/
+.ng_ico svg {
+    fill: #555;
+    cursor: pointer;
+    vertical-align : middle;
+    height: 14px;
+    width: 14px;
+}
+
+/*  color of table modifs col modification AND
+    ANIMATION
+*/
+.animated.ng-hide, .animated.ng-show{
+    -webkit-animation-duration: 1.2s;
+}
+
+/*  animation vers la position hide
+*/
+.anm_mdf.ng-hide{
+    -webkit-animation-name: bounceIn;
+    text-align: left;
+}
+
+/*  animation vers la position show
+*/
+.anm_mdf.ng-show{-webkit-animation-name: bounceOut;}
+
+/*  for modif  modif and modif bid
+    concerne le fichier 09.bid.html principalement
+    ou 08_modifs.html
+*/
+.pre_wrap {
+    white-space: pre-wrap;
+    text-align: left;
+    color: blue;
+}
+
+.pre_wrap>a:link, .td_date_mdf>a:link{
+    color: black;
+    text-decoration: none;
+}
+
+.pre_wrap>a:visited, .td_date_mdf>a:visited{
+    /*color: red;*/
+    text-decoration: none;
+}
+
+.pre_wrap>a:hover, .td_date_mdf>a:hover{
+    color: #0333ff;
+    text-decoration: none;
+}
+
+.pre_wrap>a:active, .td_date_mdf>a:active {
+    color: #0333ff;
+    text-decoration: none;
+}
+
+.arrow_down svg { /* couleur des icones du tableau modifs*/
+     fill: red;
+     height: 30px;
+     width: 30px;
+ }
+
+.arrow_up svg { /* couleur des icones du tableau modifs*/
+    fill: green;
+    height: 30px;
+    width: 30px;
+}
+
+.arrow_error svg { /* couleur des icones du tableau modifs*/
+    fill: #b3b3b3;
+    height: 30px;
+    width: 30px;
+}
+
+.span_tbl{
+    margin:0;
+    padding:0;
+    vertical-align: 10px;
+    display: inline-block;
+}
+.colonne_XS { width:    35px;  }
+.colonne_S  { width:    55px;  }
+.colonne_M  { width:    75px;  }
+.colonne_L  { width:    200px; }
+.colonne_XL { width:    300px; }
+
+/*  -----
+conventions  identitaires
+    -----
+*/
+
+#id_hlp_cont p, h4      { display: inline-block     } /* panneaux help*/
+#id_modifs, #id_bid     {/* modifs et bid*/
+   padding:  10px 15px 0 15px;
+    width: 100%;
+}
+#id_chk_modifs, #id_chk_bid {text-align: right;}
+
+.titre_modifs_bid{
+    line-height: 3em;
+}
+
+/*
+------------------------
+    nenu
+    attribut du menu principal
+------------------------
+*/
+
+#menu_titre{
+    margin : -35px 0 -10px 0;
+    text-align: center;
+}
+
+/*  menu : une div blanche qui ne se voit
+    pratiquement pas pour bien caler
+    la partie fixe du menu
+*/
+#id_menu_div_blanc{
+    background-color: #ffffff;
+    position : fixed ;
+    top : 0 ;
+    z-index : 100;
+    width : 100% ;
+}
+
+/*  met en ligne les trois (ou quatre)
+    check boxes à droite du menu principal
+*/
+#id_dv_dp{
+      display : inline-block;
+  }
+#id_titre_date {
+    margin-top:10px;
+    display : inline-block;
+}
+
+/*  dans le nenu haut-gauche
+    information last version working
+*/
+#id_lst_ver_working{
+    margin-top: 15px;
+    text-align: left;
+}
+
+/*  dans le nenu haut-droit
+    lien vers la version réduite
+*/
+#id_to_reduced{
+    margin-top: 15px;
+    text-align: left;
+}
+
+/* uniquement pour le menu allégé : table */
+.light_menu{
+    margin-top: 20px;
+    text-align: center;
+}
+
+/*  menu fixe l'affichage de la partie
+    principale du menu, celle qui peut se cacher
+*/
+#id_menu_1,
+#id_menu_2 {
+    text-align: left;
+    height:1.1em;
+}
+
+/*  menu caché fixe la hauteur de la partie cachée
+    quand la progress bar est in active
+*/
+#id_menu_4{   /* menu */
+    line-height :2.7333em ;
+    text-align: right;
+}
+
+/*  menu caché fixe la hauteur de la partie cachée
+    regle l'espacement des lignes */
+#id_marge, #id_gain, #id_cpm, #id_renta { /* menu */
+    width: 55px;
+    height: 1.7em;
+}
+
+/*  haut droite du menu
+    présise les paramètre de l'icone qui
+    permet de montrer le menu
+*/
+#id_icon_menu{
+    line-height: 4.333em;
+    text-align: right;
+}
+
+/*  menu caché fixe la hauteur de la partie cachée
+    quand la progress bar est active */
+#id_progress_bar_1 {
+    line-height : 2.4em ;
+    text-align: right;
+}
+
+/* menu caché de la progress bar*/
+#id_progress_bar_2 {
+    line-height : 10px ;
+    text-align: center;
+}
+/*
+------------------------
+levier   dans le fichier 03_levier.html
+------------------------
+*/
+#id_levier_1,
+#id_levier_2{
+    padding : 0 5px 0 0px ;
+    margin-top : -8px;
+}
+
+#id_levier_t1,
+#id_levier_t2{
+    text-height: auto;
+    width : 100%;
+}
+
+/*
+------------------------
+menu
+------------------------
+*/
+#id_menu_div_blanc {
+    margin-top: -20px;
+    /*
+    height: 1200px;
+    le height est laissé en style dans le fichier
+    index.php dans un style car la réaction est mauvaise
+    qd il figure  dans le css
+    */
+    text-align: center;
+}
+
+.height_inter_ligne1 {height: 1em;}
+
+/*
+------------------------
+06_Gain_0
+------------------------
+*/
+
+#id_gain_0 {
+    margin-top: -1em;
+    margin-bottom: -2.5em;
+}
+#id_tableau {
+    margin-top: 0;
+    margin-bottom: 0.3em;
+    padding-top:1em;
+}
+
+#id_gain_0_h2{
+    text-align: center;
+    margin: -5px auto
+}
+
+#id_gain_0_div1{height: 1.7em}
+
+#id_gain_0_section1{
+    margin: 10px;
+    align : center;
+}
+#id_gain_0_tbl1{
+     margin: 1px;
+     align : center;
+ }
+
+/*  couleurs utilisé pour rendre le titre Gain0 dynamique*/
+
+.red     {color: #ff0333;}
+.blue    {color: #0333ff;}
+.green   {color: #03ff33;}
+.yellow  {color: #ffff33;}
+.aqua    {color: #33ffff;}
+.magenta {color: #ff33ff;}
+
+/*
+------------------------
+pie   dans le fichier 02_graph_pie.html
+dans les fichiers08_modif.html et 09_bid.html
+------------------------
+*/
+
+#id_choose_sml_camp{ /* pour centrer le choix des petites pies*/
+    margin: 0 auto;
+   text-align: center;
+}
+
+#id_fortes_var_select {
+    width: 99%;
+    height: 450px;
+    line-height:2em;
+    border-radius: 7px;
+    vertical-align: middle;
+    padding:0 !important;
+    margin: 0;
+}
+
+#chart_pie_jeux, #chart_pie_regies{
+    width: 100%;
+    height: 450px ;
+    margin: 0 auto;paging : 0;
+    border : 1px solid #b0b0ee;
+    border-radius:8px;
+}
+#chart_pie_campagnes {
+    width: 100%;
+    height: 443px;
+    margin: 0 auto;
+    paging: 0 0 -20px 0;
+    border: 1px solid #b0b0ee;
+    border-radius: 8px;
+}
+
+#id_containair_pie{/* contenair principal du pie*/
+    margin: -3em 10px 0 10px;
+    padding-bottom: -1em;
+}
+
+#id_pie_title,
+#id_pie_h31,
+#id_pie_h32         { text-align: center;}
+#id_pie_sous_titre_1{ padding : 0  5px  0 15px; } /* ds 02_graph_pie.html*/
+#id_pie_sous_titre_2{ padding : 0 15px  0  5px; } /* ds 02_graph_pie.html*/
+#graph_lgn { /* iframe de graph xy dans index.php ; */
+    margin :0 auto ;
+}
+
+/*
+------------------------
+ affichage du bilan  et des variations ds 04_bilan
+ ------------------------
+*/
+#bilan {/* inuilisé, maintenu en cas*//
+margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
+
+.bilan_th1{  text-align: left;}
+
+#id_bilan{
+    margin: 10px;
+    text-align : center;
+    text-height: auto;
+}
+
+/* concerne les tableaux des variations relatives*/
+#id_bilan_rel,
+#id_bilan_rel2{
+    marge:0 auto;
+    align-content :center;
+}
+
+#bilan_input1{width: 40px;}
+
+/* concerne les tables du bilan */
+#id_bilan_tbl1,
+#id_bilan_tbl2,
+#id_bilan_tbl3{
+    margin: 0 10px 0 10px;
+    text-height: auto;
+}
+
+/* bouton chk du bilan*/
+#id_chk_bilan{
+    line-height: 2.5em;
+    text-align : left;
+}
+
+#id_h2_bilan{
+    text-align: center;
+    display: inline-block;
+}
+
+#id_fortes_var_option {
+    font-size: 0.81em;
+    margin:0;
+    padding:0;
+}
+
+#id_bilan_ul1{
+    margin: 0 0 0 30px;
+    text-align : left;
+}
+
+#id_bilan_h21{
+    text-align: center ;
+    display: inline-block;
+}
+
+#id_nb_var{ width:40px; }
+
+#id_bilan_form1{margin: 0 10px 0 10px; text-height: auto;}
+
+/*
+------------------------
+ petites campagnes définies
+ ------------------------
+*/
+
+#id_small_camp{
+    margin : 0 auto;
+    text-align: center;
+}
+
+.small_camp_2{ /* toujours dans le fichier 02_graph_pie.html */
+    padding : 0 5px 0 0 ;
+    margin-top : -3px
+ }
+.small_camp_3{ /* toujours dans le fichier 02_graph_pie.html */
+    padding : 0 5px 10px 5px ;
+    margin  : -8px 0 10px 0 ;
+}
+.small_camp_4{ /* toujours dans le fichier 02_graph_pie.html */
+    padding : 0 5px 0 5px ;
+
+}
+
+.small_camp_5{
+    padding : 0 5px 0 5px ;
+    margin-top : -8px
+}
+
+/* dresse le forme générale de la div bilan
+dans le fichier 04_bilan_html
+*/
+.bilan_div{
+    margin: 0 10px 0 10px;
+    width: 98%;
+}
+
+.contenair_h3_regies{
+    margin: 0 0 11px 0;
+}
+
+/*  ------------------------------------
+    courbes xy fichier 01_graph php
+    ------------------------------------
+*/
+iframe { /* 01_graph.php*/
+    border:0;
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+}
+
+#id_xy_principal    { margin: 0 0 0 15px;    }
+#ix_xy_tools        { margin: 0 5px 0 -20px; }
+#id_xy_lbl1         { margin : 5px 0 15px 0; }
+#id_graph_col2      { text-align: left; margin-left: 10px;}
+#id_pie_rdio        { line-height: 2.5em;display : inline-block;}
+#chart_lgn {/* imposé par amchart div : vide dans xy ds 01_graph.php*/
+    width: 100%;
+    height: 635px;
+    border : 1px solid #B0C4DE; border-radius:8px;
+}
+
+.xy_graph_exists     {background-color: #ddd;  } /* xy select zone background */
+.xy_graph_not_exists {background-color: white; } /* xy select zone background */
+
+
+/*  -----
+    coloration des chiffres et des backgrounds en fonction de la valeur des nombres des tableaux
+    -----
+*/
+/* coloration des cellules des tableaux*/
+
+.bg_v { background-color: rgba(0,253,33,0.07);   }
+.bg_b { background-color: aliceblue;             }
+.bg_j { background-color: rgba(255,253,33,0.2);  }
+.bg_m { background-color: rgba(255,3,33,0.1);    }
+.bg_p { background-color: rgba(233,163,250,0.2); }
+
+/*coloration des nombres en fonction de la valeur */
+
+.nb_rouge   {   color : #ff0333;      font-weight: bold}
+.nb_vert    {   color : green;        font-weight: bold}
+.nb_orange  {   color : darkmagenta;  font-weight: bold}
+
+/*  ------------------------------------
+    for bootstrap
+    ------------------------------------
+*/
+
+.container {width : 100%;}
+/*
+well de boostrap est utilisé pour le mmenu
+redéfinition des couleurs du menu
+*/
+.well, .well-lg, .well-sm, .well_md, .well-sx{
+    background-color: aliceblue;
+    border-radius: 8px;
+    border-color: lightsteelblue;
+    margin: 10px;
+   }
+
+.well p::first-letter {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/*
+reformulation des colonnes standard bootsrap
+*/
+.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9,
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9,
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9,
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9
+{
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: -4px;
+}
+/*  logs
+------------------------------------
+ ou présentation des bases de données brutes
+ la 1ère pour le bilan
+ le 2emme pour le tabkeau
+ -------------------------------------
+ */
+
+.logs_title {
+    color: #bb00ee;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    font-family: bold, Times, sans-serif;
+    padding: 5px 0 0 0;
+    margin: 0;
+}
+
+.logs_title2{ /*pour le tableau*/
+    color: #bb00ee;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    font-family: bold, Times, sans-serif;
+    padding: 5px 0 0 0;
+}
+
+/*pour le tableau fixe la forme le nom de la base*/
+.logs_title_base{
+    color: #bb00ee;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    font-family: bold, Times, sans-serif;
+    padding: 5px 0 0 0;
+    text-align: center;
+}
+
+/* pour fixer la hauteur de l'appel au chk log 05table.htlm*/
+.contenair_log_title{
+    margin: -10px 0 5px 0;
+}
+
+
+
+/* index even in purpul for log 04_bilan/bilan html */
+.odd {
+    color: #333333;
+    display:inline-block;
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 95%;
+    line-height: 1.4em;
+    margin : 10px 25px 10px 30px;
+    vertical-align : top;
+}
+
+/* the same for even */
+.even {
+    color: #aa00dd;
+    display:inline-block;
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 95%;
+    line-height: 1.4em;
+    margin : 10px 25px 10px 30px;
+    vertical-align : top;
+}
+
+
+.logs_td{
+    height: 2em;
+    text-align: left !important;
+}
+
+/* -----.-----.-----.-----.-----
+page modale
+php/05_modal_gialogue
+06 dans une moindre mesure
+-- -----.-----.-----.-----.-----
+*/
+.modal_title_style{color: red;}
+.modal-backdrop {
+    background-color: seashell;
+}
+
+.modal-header {
+    background-color: MistyRose;
+    border-color: lightblue;
+    border-radius: 8px;
+}
+.modal-header-aide {
+    background-color: lavender;
+    border-color: lightblue;
+    border-radius: 8px;
+}
+/*boutons des pages modales */
+.btn-default {
+    background-color: MistyRose;
+}
+.btn-aide {
+    background-color: lavender;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+    color: blue;
+    background-color: lavender;
+    border-color: lightblue;
+}
+
+/*
+ -----.-----.-----.-----.-----
+pas utilisés
+ -----.-----.-----.-----.-----
+*/
+.list_blog {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style-image: url('bullet.gif') ;
+}
+
+.ul_blog {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.li_blog {
+    background-image: url('bullet.gif');
+    background-repeat: no-repeat;
+    background-position: 0px top;
+    padding-left: 20px;
+}
+
+.li_comment {
+    background-color: aliceblue;
+    border-style: ridge;
+    border: 1px solid lightsteelblue !important;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+/*
+-----.-----.-----.-----.-----
+préformattage des inputs
+-----.-----.-----.-----.-----
+*/
+
+input[class|="form"] {
+    margin-bottom: .8em;
+}
+
+button[class ~="btn"], label[class|="control"] {
+    margin-bottom: 2.4em;
+}
+
+button[class ~="btn"] {
+    margin-bottom: .8em;
+}
+
+label {
+    display: inline-block;
+    height: 1.7em;
+}
+
+.cursor_wait    { cursor: wait;     }
+.cursor_pointer { cursor: pointer;  }
+.corsor_progress{cursor : progress; }
+.corsor_auto    {cursor : auto;     }
+
+/*
+ -----.-----.-----.-----.-----
+  class for angular
+-----.-----.-----.-----.-----
+*/
+
+/* prevent blinking  page*/
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+/* The starting CSS styles for the enter animation
+.fade_1.ng-show {
+    transition:2.5s linear all;
+    opacity:1;
+}
+*/
+/* now the element will fade out before it is removed from the DOM
+.fade_1.ng-hide {
+    transition:2.5s linear all;
+    opacity:0;
+}
+*/
+/*    Angular ng-animation */
+
+/*
+ dans le module help
+pris automatiquement par défaut
+*/
+.popover-title {
+    background-color: bisque; /* titre du pop over*/
+    border-color: lightsteelblue;
+    color: #030303;
+    width: 300px;
+}
+
+/* page du pop over
+   en cas d'erreur ou lors de l'activation du choix par clavier
+*/
+.popover-content {
+    background-color: white;
+    color: #030303;
+    width: 300px;
+    white-space: pre-wrap;
+}
+
+/* utilisé pour le menu blanc, fixe dans l'index.php*/
+.height_3 { height: 70px ;}
+
+/*
+ouverture et fermeture  du  corps du menu
+en transition
+*/
+.height_blank_menu_1{/* ng class*/
+    margin-top: -1em;
+    padding:10px;
+    -webkit-transition:all linear 1s;
+    transition:all linear 1s;
+    opacity: 1;
+    height: 120px;
+}
+.height_blank_menu_1.ng-hide {
+    opacity: 0;
+    line-height: 0;
+    font-size: 0.2em;
+    color: blue;
+    opacty: 0;
+    height: 0;
+}
+/* bas du menu à cliquer*/
+.menu_height_XS a{
+    margin:0;
+    padding:0;
+    height: 3px;
+    color :red;
+    text-decoration: none;
+}
+
+/* pas utilisé */
+.height_blank_menu_2/* ng class*/ {height:  80px;}
+
+/*
+ouverture et fermeture du titre  du menu
+pour les autres module que le menu lui même
+*/
+.menu-show-hide {
+    margin-top: -1em;
+    padding:10px;
+    -webkit-transition:all linear 1s;
+    transition:all linear 1s;
+    opacity: 1;
+}
+
+/*
+ position de départ : de la fermeture ou
+l'ouverture du titre du menu
+*/
+.menu-show-hide.ng-hide {opacity:0;
+    line-height: 0;
+    font-size: 0.2em;
+    color : blue;
+    opacty :0;
+}
+
+/*
+ mise en place du curseur attente
+lors d'un clic sous angular
+*/
+
+input[ng-mousedown],
+option[ng-mousedown]
+{cursor:wait;} /*show cursor waiting*/
+
+/*
+-----.-----.-----.-----.-----
+loader
+progress bar du menu
+-- -----.-----.-----.-----.--
+*/
+.loader {
+    margin-top: 5px;
+    height: 4px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #ddd;
+}
+.loader:before{
+    display: block;
+    position: absolute;
+    content: "";
+    left: -200px;
+    width: 200px;
+    height: 5px;
+    background-color: #80d4ff;
+    animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+    from {left: -20px; width: 30%;}
+    50% {width: 30%;}
+    70% {width: 70%;}
+    80% { left: 50%;}
+    95% {left: 120%;}
+    to {left: 100%;}
+}
+
+/* -----.-----.-----.-----.-----
+loader menu  bar  -----
+-- -----.-----.-----.-----.-----
+*/
+.bar {
+    width: 100%;
+    height: 8px;
+    border: 1px solid #2980b9;
+    border-radius: 5px;
+    background-image:
+            repeating-linear-gradient(
+                    45deg,
+                    #bbbbbb,
+                    #bbbbbb 11px,
+                    #eee 10px,
+                    #eee 20px /* determines size */
+            );
+    background-size: 25px 25px;
+    animation: move .5s linear infinite;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 28px 0;
+    }
+}

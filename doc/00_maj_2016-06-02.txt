@@ -1,0 +1,13 @@
+2016-06-06
+URL logs=on permet d'afficher ts les logs ; les donneés
+brutes des bases de données
+
+2016-05-27
+affichge des crv des bid et 
+la possibilité conjointe des deux affichages
+
+
+2016-05-12
+préparation intégration xy des modifs conjointes 
+cvr et bid
+

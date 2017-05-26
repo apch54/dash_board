@@ -1,0 +1,455 @@
+<!--¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ * -->
+<!--affichage du bilan  2015-11-15                                             -->
+<!--¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ * -->
+
+<!-- un scroll fade in ou out -->
+<div    class="container-fluid menu-show-hide"
+        ng-show="chk_aff_bilan && board.bilan "
+>
+    <!--
+      ¨¨¨¨¨¨¨¨¨¨¨ ~¨¨¨¨¨¨¨¨¨¨¨ ~ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *
+        bilan     ~ ¨¨¨¨¨¨¨¨¨¨¨¨  ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *
+      ¨¨¨¨¨¨¨¨¨¨¨ ~¨¨¨¨¨¨¨¨¨¨¨ ~ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *
+     -->
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 mp0">
+
+            <!-- titre du tableau -->
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs:
+                <input id="chk_aff_logs_bilan" type="checkbox" ng-model="logs.chk.bilan">
+            </div>
+            <h2 class="center inline_block"> Bilan moyen quotidien : {{gbd_bilan[0].Date}}
+                [{{gbd_bilan[3].Date}}] <!-- affichage de la base v, p, w-->
+            </h2>
+
+            <!-- début aff log -->
+            <div ng-show="logs.chk.bilan">
+                <div class="logs_title_base"> Base : gbd_bilan </div><!-- Nom de la base comme titre-->
+                <div ng-repeat="x1 in gbd_bilan track by $index"
+                     class="align_left" ;
+                >
+                    <p ng-class-odd="'odd'" ng-class-even="'even'">
+                        {{x1}}
+                    </p>
+                </div>
+                <br>
+            </div>
+            <!-- fin aff  log -->
+
+            <form class="line_height_18">
+                <table ng-model="affichage_bilan" class="bilan_div">
+                    <tr>
+                        <th class="bg_m bilan_th1" width="40%" >
+                            <!-- pop over help -->
+                            <a ng-href=""
+                               uib-popover="{{M_help.bilan.content}}"
+                               popover-placement="right"
+                               popover-title="{{M_help.bilan.title}}"
+                               popover-trigger="mouseenter"
+                            >
+                                <ng-md-icon icon="help" class="icon" size="24"></ng-md-icon>
+                            </a>
+                        </th>
+                        <th class="bg_m"> Marge(€)</th>
+                        <th class="bg_m"> Marge :<br> %</th>
+                        <th class="bg_m"> Nb Clc<br>(x 1000)</th>
+                        <th class="bg_m"> Nb clc<br>%</th>
+                    </tr>
+                    <tr ng-repeat=" x in  gbd_bilan track by $index">
+                        <td class="bilan_th1"> {{x.Bilan}}</td>
+
+                        <td class="bg_m {{coul_2(-.9, 500, x.Marge)}}">
+                            {{x.Marge.format()}}
+                        </td>
+
+                        <td class="bg_m {{coul_2(-.9, 1,  pourcentage(gbd_bilan[0].Marge,x.Marge))}}">
+                            {{ pourcentage(gbd_bilan[0].Marge, x.Marge).format(0) }}
+                        </td>
+
+                        <td class="{{coul_2(-.9, 100, x.Nb_clics/1000)}}" >{{(x.Nb_clics/1000).format(0) }}</td>
+                        <td class="{{coul_2(-.9, 1, pourcentage(gbd_bilan[0].Nb_clics, x.Nb_clics))}}" >
+                            {{pourcentage(gbd_bilan[0].Nb_clics, x.Nb_clics).format(0) }}
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+            <ul id="id_bilan_ul1">
+                <li>Les % sont donnés en fonction de la première ligne</li>
+                <li>Les marges sont en € et le nb de clics en milliers</li>
+            </ul>
+        </div>
+
+        <!-- ¨¨¨¨¨¨¨¨¨¨¨ ~¨¨¨¨¨¨¨¨¨¨¨ ~ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *  -->
+        <!-- Variation absolues  -->
+        <!-- ¨¨¨¨¨¨¨¨¨¨¨ ~¨¨¨¨¨¨¨¨¨¨¨ ~ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *  -->
+
+        <div class="col-sm-6 col-md-6 col-lg-6 mp0">
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs:
+                <input type="checkbox" ng-model="logs.chk.var_abs">
+            </div>
+            <h2 id="id_bilan_h21">
+                Var.abs.: {{title_variation}} :
+
+                <span class="{{coul_2(-.9, .05, gbd_bilan[0].Marge - gbd_bilan[i_var()].Marge)}}">
+                    {{ (gbd_bilan[0].Marge - gbd_bilan[i_var()].Marge).format(0) }}
+                </span>
+                €
+                (<span class="{{coul_2(-.9, .05, pourcentage(gbd_bilan[0].Marge, gbd_bilan[2].Marge))}}">
+                    {{ pourcentage(gbd_bilan[0].Marge, gbd_bilan[i_var()].Marge).format(0) }}
+                </span>
+                %)
+            </h2>
+            <!-- Nb de ligne dans les variations¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *  -->
+
+            <form class="inline_block">
+                <label class="dib nombre" for="id_nb_var">&nbsp;&nbsp;&nbsp;&nbsp; Nb var</label>
+                <input id="id_nb_var"
+                       type="number"
+                       placeholder=4
+                       min="1" max="10"
+                       ng-model="nb_var"
+                       ng-change="change_R()"
+                >
+            </form>
+
+            <!-- début aff log -->
+            <div ng-show="logs.chk.var_abs">
+                <div class="logs_title_base"> Base : bd_var_abs </div><!-- Nom de la base comme titre-->
+                <!-- table log-->
+                <div ng-repeat="x2 in bd_var_abs track by $index"
+                     class="align_left" ;
+                >
+                    <p ng-class-odd="'odd'" ng-class-even="'even'">
+                        {{x2}}
+                    </p>
+                </div>
+                <br>
+            </div>
+            <!-- table log fin -->
+            <!--* tri  des var abs des marges¨¨¨¨¨¨¨¨¨¨¨¨ *-->
+
+            <form>
+                <table width="97%" ng-model="affichage_bilan" id="id_bilan_form1">
+                    <tr>
+                        <th class="bg_j">
+                            <!-- pop over help -->
+                            <a ng-href=""
+                               uib-popover="{{M_help.var_abs.content}}"
+                               popover-placement="right"
+                               popover-title="{{M_help.var_abs.title}}"
+                               popover-trigger="mouseenter"
+                            >
+                                <ng-md-icon icon="help" class="icon" size="24"></ng-md-icon>
+                            </a>
+                        </th>
+                        <th class="bg_j colonne_L" >Campagnes triées par variation<br>
+                            <ins>absolue de marge</ins>
+                        </th>
+                        <th class="bg_j"> Mrg ce jour (€)</th>
+                        <th class="bg_j"> moy Mrg <br> {{title_variation}}</th>
+                        <th class="bg_j"> var €</th>
+                        <th class="bg_j"> var %</th>
+                    </tr>
+
+                    <tr ng-repeat="cmp in  bd_var_abs | limitTo : nb_var track by $index"
+                        ng-click="var_2_glob(cmp)"
+                    >
+                        <td class="align_left">
+                            <a ng-href="#" class="thtb ">{{cmp.idCamp}}</a>
+                        </td>
+                        <td class="align_left">
+                            {{cmp.Regie}} [{{cmp.Camp}}] {{cmp.Jeu}}
+                        </td>
+
+                        <td class="{{coul_2(-.9, 50, cmp.Dddr_marge)}}">
+                            {{ cmp.Dddr_marge.format()}}
+                        </td>
+
+                        <td class="{{coul_2(-.9, 50, cmp.Marge)}}">
+                            {{cmp.Marge.format()}}
+                        </td>
+
+                        <td class="{{coul_2(-.9, 10, cmp.Var_marge)}}" >
+                            {{ cmp.Var_marge.format() }}
+                        </td>
+                        <td  class="{{coul_2(-.9, 1, cmp.Var_marge_relative )}} align_right">
+                            {{ cmp.Var_marge_relative.format() }}
+                        </td>
+                    </tr>
+                </table>
+
+
+                <!-- début aff log -->
+                <div ng-show="logs.chk.var_abs">
+                    <!-- table log-->
+                    <div class="logs_title_base"> Base : bd_var_abs_clic </div><!-- Nom de la base comme titre-->
+                    <div ng-repeat="x3 in  bd_var_abs_clic track by $index"
+                         class="align_left" ;
+                    >
+                        <!--<p class="inline_block milieu">{{$index}}&nbsp;&nbsp;&nbsp;</p> -->
+                        <p ng-class-odd="'odd'" ng-class-even="'even'">
+                            {{x3}}
+                        </p>
+                    </div>
+                    <br>
+                </div>
+                <!-- table log fin -->
+                <br>
+
+                <!--* trie  des var abs des clics¨¨¨¨¨¨¨¨¨¨¨¨ *-->
+
+                <table width="97%" ng-model="affichage_bilan" id="id_bilan_tbl3">
+                    <tr>
+                        <th class="bg_j">
+
+                            <!-- pop over help -->
+                            <a ng-href=""
+                               uib-popover="{{M_help.var_abs_clic.content}}"
+                               popover-placement="right"
+                               popover-title="{{M_help.var_abs_clic.title}}"
+                               popover-trigger="mouseenter"
+                            >
+                                <ng-md-icon icon="help" class="icon" size="24"></ng-md-icon>
+                            </a>
+                        </th>
+                        <th class="bg_j colonne_L">Campagnes triées par variation<br>
+                            <ins>absolue du nb de clics</ins>
+                        </th>
+                        <th class="bg_j"> Mrg ce jour (€)</th>
+                        <th class="bg_j"> Nb clics ce jour</th>
+                        <th class="bg_j"> moy nb clics <br> {{title_variation}}</th>
+                        <th class="bg_j"> var nb<br>clics</th>
+                        <th class="bg_j"> var %</th>
+
+                    </tr>
+
+                    <tr ng-repeat="cmp2 in  bd_var_abs_clic | limitTo : nb_var track by $index "
+                        ng-click="var_2_glob(cmp2)"
+                    >
+
+                        <td class="align_left">
+                            <a ng-href="#" class="thtb ">{{cmp2.idCamp}}</a>
+                        </td>
+                        <td class="align_left">
+                            {{cmp2.Regie}} [{{cmp2.Camp}}] {{cmp2.Jeu}}
+                        </td>
+                        <td class="{{coul_2(-.09, 50, cmp2.Dddr_marge)}}">
+                            {{ cmp2.Dddr_marge.format()}}
+                        </td>
+
+                        <td class="{{ coul_2(-.09, 100, cmp2.Dddr_TjClic) }} ">
+                            {{cmp2.Dddr_TjClic.format()}}
+                        </td>
+
+                        <td class="{{ coul_2(-.09, 100, cmp2.TjClic) }}">
+                            {{cmp2.TjClic.format()}}
+                        </td>
+
+                        <td class="bg_j {{ coul_2(-.09, 100,cmp2.Var_clic) }}">
+                            {{cmp2.Var_clic.format() }}
+                        </td>
+                        <td class="{{ coul_2(-.09, 1, cmp2.Var_clic_relative )}}  align_right">
+                            {{cmp2.Var_clic_relative.format() }}
+                        </td>
+
+                    </tr>
+                </table>
+
+            </form>
+
+            <section align="left">
+                <input id="chk_aff_var_rel" type="checkbox" ng-model="chk_aff_var_rel" align="left">
+                <label for="chk_aff_var_rel" id="id_chk_bilan">:&nbsp; variations
+                    relatives.</label>
+            </section>
+        </div>
+    </div>
+
+    <!-- ¨¨¨¨¨¨¨¨¨¨¨ ~¨¨¨¨¨¨¨¨¨¨¨ ~ ~ ¨¨¨¨¨¨¨¨¨¨¨¨  -->
+    <!-- Variation relatives   ¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨  -->
+    <!-- ¨¨¨¨¨¨¨¨¨¨¨ ~¨¨¨¨¨¨¨¨¨¨¨ ~ ~ ¨¨¨¨¨¨¨¨¨¨¨¨  -->
+
+    <!-- Variation relatives marges -->
+
+    <div class="row" ng-show="chk_aff_var_rel">
+
+        <div class="col-sm-6 col-md-6 col-lg-6 mp0" id="id_bilan_rel2">
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs:
+                <input type="checkbox" ng-model="logs.chk.var_rel">
+            </div>
+            <h2 id="id_h2_bilan">
+                Var. rel.: {{title_variation}} :
+               <span class="{{coul_2(-.9999, .05, pourcentage(gbd_bilan[0].Marge, gbd_bilan[2].Marge))}}">
+                   {{ pourcentage(gbd_bilan[0].Marge, gbd_bilan[i_var()].Marge).format(0) }}
+               </span>
+                %
+                (<span class="{{coul_2(-.9999, .05, gbd_bilan[0].Marge - gbd_bilan[2].Marge) }}">
+                   {{ (gbd_bilan[0].Marge - gbd_bilan[i_var()].Marge).format(0) }}
+               </span>
+                €)
+            </h2>
+
+            <!-- début aff log -->
+
+            <div ng-show="logs.chk.var_rel">
+                c
+                <div ng-repeat="x4 in bd_var_rel track by $index"
+                     class="align_left" ;
+                >
+                    <p ng-class-odd="'odd'" ng-class-even="'even'">
+                        {{x4}}
+                    </p>
+                </div>
+                <br>
+            </div>
+            <!-- fin aff  log -->
+
+            <table width="97%" ng-model="affichage_bilan" id="id_bilan_tbl1">
+                <tr>
+                    <th class="bg_v">
+
+                        <!-- pop over help -->
+                        <a ng-href=""
+                           uib-popover="{{M_help.var_rel.content}}"
+                           popover-placement="right"
+                           popover-title="{{M_help.var_rel.title}}"
+                           popover-trigger="mouseenter"
+                        >
+                            <ng-md-icon icon="help" class="icon" size="24"></ng-md-icon>
+                        </a>
+                    </th>
+                    <th class="bg_v colonne_L" >Campagnes triées par variation
+                        <ins>relative des marges</ins>
+                    </th>
+                    <th class="bg_v"> Mrg ce jour (€)</th>
+                    <th class="bg_v"> moy Mrg <br> {{title_variation}}</th>
+                    <th class="bg_v"> var €</th>
+                    <th class="bg_v"> var %</th>
+                </tr>
+
+
+                <tr ng-repeat=" cmp_r in  bd_var_rel | limitTo : nb_var track by $index "
+                    ng-click="var_2_glob(cmp_r)"
+                >
+                    <td  class="align_left">
+                        <a ng-href="#" class="thtb">{{cmp_r.idCamp}}</a>
+                    </td>
+                    <td class="align_left">
+                        {{cmp_r.Regie}} [{{cmp_r.Camp}}] {{cmp_r.Jeu}}"
+                    </td>
+
+                    <td class="{{ coul_2(-.09, 50, cmp_r.Dddr_marge) }} ">
+                        {{ cmp_r.Dddr_marge.format()}}
+                    </td>
+
+                    <td class="{{ coul_2(-.09, 50, cmp_r.Marge) }}">
+                        {{cmp_r.Marge.format()}}
+                    </td>
+
+                    <td class="{{ coul_2(-.09, 10, cmp_r.Var_marge) }}">
+                        {{ cmp_r.Var_marge.format() }}
+                    </td>
+                    <td class="bg_v {{ coul_2(-.09, 1, cmp_r.Var_marge_relative )}} align_right">
+                        {{ cmp_r.Var_clic_relative.format() }}
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <!-- Variation relatives Nb Clics -->
+
+        <div class="col-sm-6 col-md-6 col-lg-6 mp0" id="id_bilan_rel">
+            <!--bd_glob_dvdp ===> {{bd_var_rel_clic}} -->
+
+            <h2 class="centrer">
+                Var. rel.: {{title_variation}} :
+                <span class="{{coul_2(-.9999, .05, pourcentage(gbd_bilan[0].Marge, gbd_bilan[2].Marge))}}">
+                    {{ pourcentage(gbd_bilan[0].Marge, gbd_bilan[i_var()].Marge).format(0) }}
+                </span>
+                %
+                (<span class="{{coul_2(-.9999, .05, gbd_bilan[0].Marge - gbd_bilan[2].Marge) }}">
+                    {{ (gbd_bilan[0].Marge - gbd_bilan[i_var()].Marge).format(0) }}
+                </span>
+                €)
+            </h2>
+
+            <!-- début aff log -->
+            <div ng-show="logs.chk.var_rel">
+                <div class="logs_title_base"> Base : bd_var_rel-clic </div><!-- Nom de la base comme titre-->
+                <div ng-repeat="x5 in bd_var_rel_clic track by $index"
+                     class="align_left" ;
+                >
+                    <p ng-class-odd="'odd'" ng-class-even="'even'">
+                        {{x5}}
+                    </p>
+                </div>
+                <br>
+            </div>
+            <!-- fin aff  log -->
+
+            <table width="97%" ng-model="affichage_bilan" id="id_bilan_tbl2">
+
+                <tr>
+                    <th class="bg_v">
+
+                        <!-- pop over help -->
+                        <a ng-href=""
+                           uib-popover="{{M_help.var_rel_clic.content}}"
+                           popover-placement="right"
+                           popover-title="{{M_help.var_rel_clic.title}}"
+                           popover-trigger="mouseenter"
+                        >
+                            <ng-md-icon icon="help" class="icon" size="24"></ng-md-icon>
+                        </a>
+                    </th>
+                    <th class="bg_v colonne_L">Campagnes triées par variation
+                        <ins>relative du nb de clics</ins>
+                    </th>
+                    <th class="bg_v"> Mrg ce jour(€)</th>
+                    <th class="bg_v"> Nb clics ce jour</th>
+                    <th class="bg_v"> moy Nb clics <br> {{title_variation}}</th>
+                    <th class="bg_v"> var nb de clics</th>
+                    <th class="bg_v"> var %</th>
+                </tr>
+
+                <tr ng-repeat=" cmp_rc in  bd_var_rel_clic | limitTo : nb_var  track by $index "
+                    ng-click="var_2_glob(cmp_rc)"
+                >
+                    <td class="align_left">
+                        <a ng-href="#" class="thtb ">{{cmp_rc.idCamp}}</a>
+                    </td>
+                    <td class="align_left">
+                        {{cmp_rc.Regie}} [{{cmp_rc.Camp}}] {{cmp_rc.Jeu}}"
+                    </td>
+                    <td class="{{ coul_2(-.09, 50, cmp_rc.Dddr_marge) }} ">
+                        {{ cmp_rc.Dddr_marge.format()}}
+                    </td>
+
+                    <td class="{{ coul_2(-.09, 50, cmp_rc.Dddr_TjClic) }} ">
+                        {{ cmp_rc.Dddr_TjClic.format()}}
+                    </td>
+
+                    <td class="{{ coul_2(-.09, 50, cmp_rc.TjClic) }}">
+                        {{cmp_rc.TjClic.format()}}
+                    </td>
+
+                    <td class="{{ coul_2(-.09, 10, cmp_rc.Var_clic) }}">
+                        {{ cmp_rc.Var_clic.format() }}
+                    </td>
+                    <td class="bg_v {{ coul_2(-.09, 1, cmp_rc.Var_clic_relative )}} align_right">
+                        {{ cmp_rc.Var_clic_relative.format() }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!--{{test}}-->

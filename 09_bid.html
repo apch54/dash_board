@@ -1,0 +1,448 @@
+<!--
+--------
+Montre la table M Bid
+Cf le 2016-04-09
+--------
+-->
+<div id="id_bid" ng-show="bid.show">
+
+    <div class="row">
+        <div class="col-sm-3">
+            <a ng-href=""
+               uib-popover="{{M_help.bid.content}}"
+               popover-placement="right"
+               popover-title="{{M_help.bid.title}}"
+               popover-trigger="mouseenter"
+            >
+                <ng-md-icon icon="help" class="icon"></ng-md-icon>
+            </a></div>
+        <div class="col-sm-6">
+            <h2 class="milieu titre_modifs_bid">
+                Modifications des Bid
+                [{{titre_menu_base();}}]
+            </h2>
+        </div>
+        <div id="id_chk_bid" class="col-sm-3">
+            Tous les bids : <input type="checkbox" ng-model="chk_bid_complet" ng-click="chk_bid_click();">
+        </div>
+    </div>
+
+    <!-- début du  log : affichage de données-->
+
+    <div class="contenair_log_title">
+        <div class="milieu">
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs bid bd_aff:
+                <input type="checkbox" ng-model="logs.chk.bid">
+            </div>
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs bd(complète):
+                <input type="checkbox" ng-model="logs.chk.bid_cmp">
+            </div>
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs bid bd(réduits):
+                <input type="checkbox" ng-model="logs.chk.bid_red">
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="logs.chk.bid">
+        <div class="logs_title_base"> Base : mdf.bd_aff </div> <!-- Nom de la base comme titre-->
+        <div ng-repeat="x15 in mdf.bd_aff track by $index"
+             class="align_left"
+        >
+            <p ng-class-odd="'odd'" ng-class-even="'even'">
+                {{x15}}
+            </p>
+        </div>
+        <br>
+    </div>
+
+    <div ng-show="logs.chk.bid_cmp">
+        <div class="logs_title_base"> Base : mdf.bd </div> <!-- Nom de la base comme titre-->
+        <div ng-repeat="x19 in mdf.bd track by $index"
+             class="align_left"
+        >
+            <p ng-class-odd="'odd'" ng-class-even="'even'">
+                {{x19}}
+            </p>
+        </div>
+        <br>
+    </div>
+
+    <div ng-show="logs.chk.bid_red">
+        <div class="logs_title_base"> Base : mdf.bd </div> <!-- Nom de la base comme titre-->
+        <div ng-repeat="x22 in mdf.bd_reduits track by $index"
+             class="align_left" ;
+        >
+            <p ng-class-odd="'odd'" ng-class-even="'even'">
+                {{x22}}
+            </p>
+        </div>
+        <br>
+    </div>
+    <!-- fin du  log -->
+
+<!-- table -->
+
+<table class="center_div" width="100%">
+    <tr class="bg_b ">
+
+        <th class="colonne_XS">
+            <span class='span_tbl'>id</span>
+                <span class="inline_block">
+                    <section ng-click="clic_tri_bid('IdCamp', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_bid('IdCamp', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+        </th>
+
+        <th class="colonne_M">
+            <span class='span_tbl'>Jeu</span>
+                <span class="inline_block">
+                    <section ng-click="clic_tri_bid('Jeu', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_bid('Jeu', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+        </th>
+
+        <th class="colonne_S">
+            <span class='span_tbl'>Régie</span>
+                <span class="inline_block">
+                    <section ng-click="clic_tri_bid('Regie', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_bid('Regie', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+        </th>
+
+        <th class="colonne_M">
+            <span class='span_tbl'>Camp</span>
+                <span class="inline_block">
+                    <section ng-click="clic_tri_bid('Camp', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_bid('Camp', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+        </th>
+
+        <th class="colonne_S">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">mrg<br>avant</div>
+                    <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_bid('avg_mrg_avant/1', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_bid('avg_mrg_avant/1', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </th>
+
+        <th class="colonne_M">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">1 Clic<br>avant</div>
+                    <div class="col-sm-4 mp0">
+
+                            <span class="inline_block">
+                            <section ng-click="clic_tri_bid('Moy_mrg_clc_avt', 'up')">
+                                <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                            </section>
+                            <section ng-click="clic_tri_bid('Moy_mrg_clc_avt', 'down')">
+                                <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                            </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+
+        </th>
+
+        <th class="colonne_M">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">Date <br>modif</div>
+                    <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_bid('Date', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_bid('Date', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </th>
+
+        <th class="colonne_M">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">1 Clic<br>après</div>
+                    <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_bid('Moy_mrg_clc_aps', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_bid('Moy_mrg_clc_aps', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </th>
+
+        <th class="colonne_S">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">mrg<br>après</div>
+                    <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_bid('avg_mrg_apres/1', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_bid('avg_mrg_apres/1', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </th>
+
+        <th>Modifications</th>
+
+        <th class="colonne_S">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">bilan<br>bid</div>
+                    <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_bid('bilan_bid', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_bid('bilan_bid', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </th>
+        <th class="colonne_S">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">Bid<br>avant</div>
+                    <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_bid('Old_bid', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_bid('Old_bid', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </th>
+
+        <th class="colonne_S">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">Bid<br>après</div>
+                    <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_bid('New_bid', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_bid('New_bid', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </th>
+
+        <th class="colonne_S">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">bilan<br>mrg</div>
+                    <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_bid('bilan_mrg', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_bid('bilan_mrg', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </th>
+
+        <th class="colonne_M">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 mp0">1 Clic<br>bilan</div>
+                    <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_bid('bilan_mrg_clc', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_bid('bilan_mrg_clc', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                    </div>
+                </div>
+            </div>
+        </th>
+    </tr>
+    <tr
+        ng-repeat="bid in bid.bd_aff | filter: bid.flt | orderBy: tri_bid.col : tri_bid.desc"
+    ><!--
+            <td>
+                <a href="#" ng-click="aff_xy_mdf_bid(bid,'bid')">
+                    {{bid.IdCamp}}
+                </a>
+            </td>
+            -->
+
+        <td>
+            <a href="#"
+               ng-click="aff_xy_mdf_bid(bid, 'bid')">
+                {{bid.IdCamp}}
+            </a>
+
+            <div class="loader" ng-show="bid.shw_id == 'loader'"></div>
+            <div class="mp0">
+                <button class="sml_btn" ng-click="voir_mdf_ou_bid(bid,'bid')" ng-show="bid.shw_id == 'btn'">
+                    voir
+                </button>
+            </div>
+        </td>
+
+
+        <td>{{bid.Jeu}}</td>
+        <td>{{bid.Regie}}</td>
+        <td>{{bid.Camp}}</td>
+        <td class="bg_j"> {{(bid.avg_mrg_avant/1).format(2)}}</td>
+        <td class="bg_b"> {{(bid.Moy_mrg_clc_avt*100).format(2)}}</td>
+
+        <td class="td_date_mdf">
+            <a href="#" ng-click="set_flt_bid(bid)">
+                {{clic_reduce_bid_date(bid, bid.ng_model)}}
+            </a>
+        </td>
+
+        <td class="bg_b {{coul_2(0, 0.01, bid.Moy_mrg_clc_aps - bid.Moy_mrg_clc_avt ) }}">
+            {{ (bid.Moy_mrg_clc_aps*100).format(2)}}
+        </td>
+        <td class="bg_j {{coul_2(0, 0.1, bid.avg_mrg_apres - bid.avg_mrg_avant) }}">
+            {{(bid.avg_mrg_apres/1).format(2)}}
+        </td>
+
+        <td><!-- modifs cell of modif bd -->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9">
+                            <span>
+                                <p ng-hide="bid.ng_model" class="animated anm_mdf">
+                                    {{clic_reduce_bid(bid, bid.ng_model)}}
+                                </p>
+                            </span>
+
+                            <span class="mp0">
+                                <p ng-show="bid.ng_model" class="pre_wrap animated anm_mdf">{{bid.Modif}}</p>
+                            </span>
+
+                    </div>
+                    <div class="col-sm-2 align_right mp0">
+                        <input
+                            type="checkbox"
+                            ng-model="bid.ng_model"
+                            ng-click="clic_reduce_bid(bid, bid.ng_model); clic_bid_cls(bid, bid.ng_model);"
+                        >
+                    </div>
+                </div>
+            </div>
+        </td>
+
+        <td class="{{coul_2(0, 5, bid.bilan_bid*100) }}">
+            <ng-md-icon icon="call_received" class="arrow_down"
+                        ng-show="aff_icon_modifs(bid.bilan_bid)=='down'"></ng-md-icon>
+            <ng-md-icon icon="call_made" class="arrow_up"
+                        ng-show="aff_icon_modifs(bid.bilan_bid)=='up'"></ng-md-icon>
+            <ng-md-icon icon="report_problem" class="arrow_error"
+                        ng-show="aff_icon_modifs(bid.bilan_bid)=='error'"></ng-md-icon>
+            {{(bid.bilan_bid*100).format(0);}}{{aff_pour_cent(bid.bilan_bid)}}
+        </td>
+
+        <td> {{(bid.Old_bid/1).format(2)}}</td>
+        <td> {{(bid.New_bid/1).format(2)}}</td>
+
+        <td class="bg_j {{coul_2(0, 5, bid.bilan_mrg*100) }}">
+            <ng-md-icon icon="call_received" class="arrow_down"
+                        ng-show="aff_icon_modifs(bid.bilan_mrg)=='down'"></ng-md-icon>
+            <ng-md-icon icon="call_made" class="arrow_up"
+                        ng-show="aff_icon_modifs(bid.bilan_mrg)=='up'"></ng-md-icon>
+            <ng-md-icon icon="report_problem" class="arrow_error"
+                        ng-show="aff_icon_modifs(bid.bilan_mrg)=='error'"></ng-md-icon>
+            {{(bid.bilan_mrg*100).format(0);}}{{aff_pour_cent(bid.bilan_mrg)}}
+        </td>
+        <td class="bg_b {{coul_2(0, 5, bid.bilan_mrg_clc*100) }}">
+            <ng-md-icon icon="call_received" class="arrow_down"
+                        ng-show="aff_icon_modifs(bid.bilan_mrg_clc*100)=='down' "></ng-md-icon>
+            <ng-md-icon icon="call_made" class="arrow_up"
+                        ng-show="aff_icon_modifs(bid.bilan_mrg_clc*100)=='up' "></ng-md-icon>
+            <ng-md-icon icon="report_problem" class="arrow_error"
+                        ng-show="aff_icon_modifs(bid.bilan_mrg_clc*100)=='error' "></ng-md-icon>
+            {{(bid.bilan_mrg_clc*100).format(0);}}{{aff_pour_cent(bid.bilan_mrg_clc)}}
+        </td>
+    </tr>
+</table>
+</div>
+<br><br>
+
+   

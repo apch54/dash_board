@@ -1,0 +1,370 @@
+<!--
+--------
+Montre la table modifs
+Cf le 2016-03-24
+--------
+-->
+
+<!-- titre -->
+<div id="id_modifs" ng-show="mdf.show">
+
+    <div class="row">
+        <div class="col-sm-2"> <!-- help icon -->
+            <a ng-href=""
+               uib-popover="{{M_help.modifs.content}}"
+               popover-placement="right"
+               popover-title="{{M_help.modifs.title}}"
+               popover-trigger="mouseenter"
+            >
+                <ng-md-icon icon="help" class="icon"></ng-md-icon>
+            </a></div>
+        <div class="col-sm-8 ">
+            <h2 class="milieu titre_modifs_bid">
+                Modifications des jeux
+                [{{titre_menu_base();}}]
+            </h2>
+        </div>
+        <div id="id_chk_modifs" class="col-sm-2">
+            Toutes les modifs CVR : <input type="checkbox" ng-model="chk_mdf_complet" ng-click="chk_mdf_click();">
+
+        </div>
+    </div>
+
+    <!-- début du  log : affichage de données-->
+
+    <div class="contenair_log_title">
+        <div class="milieu">
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs cvr bd_aff:
+                <input type="checkbox" ng-model="logs.chk.cvr">
+            </div>
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs bd(complète):
+                <input type="checkbox" ng-model="logs.chk.cvr_cmp">
+            </div>
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs cvr bd(réduits):
+                <input type="checkbox" ng-model="logs.chk.cvr_red">
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="logs.chk.cvr">
+        <div class="logs_title_base"> Base : mdf.bd_aff </div> <!-- Nom de la base comme titre-->
+        <div ng-repeat="x15 in mdf.bd_aff track by $index"
+             class="align_left"
+        >
+            <p ng-class-odd="'odd'" ng-class-even="'even'">
+                {{x15}}
+            </p>
+        </div>
+        <br>
+    </div>
+
+    <div ng-show="logs.chk.cvr_cmp">
+        <div class="logs_title_base"> Base : mdf.bd </div> <!-- Nom de la base comme titre-->
+        <div ng-repeat="x19 in mdf.bd track by $index"
+             class="align_left"
+        >
+            <p ng-class-odd="'odd'" ng-class-even="'even'">
+                {{x19}}
+            </p>
+        </div>
+        <br>
+    </div>
+
+    <div ng-show="logs.chk.cvr_red">
+        <div class="logs_title_base"> Base : mdf.bd </div> <!-- Nom de la base comme titre-->
+        <div ng-repeat="x22 in mdf.bd_reduits track by $index"
+             class="align_left" ;
+        >
+            <p ng-class-odd="'odd'" ng-class-even="'even'">
+                {{x22}}
+            </p>
+        </div>
+        <br>
+    </div>
+    <!-- fin du  log -->
+
+    <!-- table -->
+
+    <table class="center_div" width="100%">
+        <tr class="bg_v ">
+
+            <th class="colonne_XS">
+                <span class='span_tbl'>id</span>
+                <span class="inline_block">
+                    <section ng-click="clic_tri_modifs('IdCamp', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_modifs('IdCamp', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="colonne_M">
+                <span class='span_tbl'>Jeu</span>
+                <span class="inline_block">
+                    <section ng-click="clic_tri_modifs('Jeu', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_modifs('Jeu', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="colonne_S">
+                <span class='span_tbl'>Régie</span>
+                <span class="inline_block">
+                    <section ng-click="clic_tri_modifs('Regie', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_modifs('Regie', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="colonne_M">
+                <span class='span_tbl'>Camp</span>
+                <span class="inline_block">
+                    <section ng-click="clic_tri_modifs('Camp', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_modifs('Camp', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="colonne_S">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-8 mp0">mrg<br>avant</div>
+                        <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_modifs('avg_mrg_avant/1', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_modifs('avg_mrg_avant/1', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </th>
+
+            <th class="colonne_M">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-8 mp0">1 Clic<br>avant</div>
+                        <div class="col-sm-4 mp0">
+
+                            <span class="inline_block">
+                            <section ng-click="clic_tri_modifs('Moy_mrg_clc_avt', 'up')">
+                                <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                            </section>
+                            <section ng-click="clic_tri_modifs('Moy_mrg_clc_avt', 'down')">
+                                <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                            </section>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+
+            </th>
+
+            <th class="colonne_M">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-8 mp0">Date <br>modif</div>
+                        <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_modifs('Date', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_modifs('Date', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </th>
+
+            <th class="colonne_M">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-8 mp0">1 Clic<br>après</div>
+                        <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_modifs('Moy_mrg_clc_aps', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_modifs('Moy_mrg_clc_aps', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </th>
+
+            <th class="colonne_S">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-8 mp0">mrg<br>après</div>
+                        <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_modifs('avg_mrg_apres/1', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_modifs('avg_mrg_apres/1', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </th>
+
+            <th>Modifications</th>
+
+            <th class="colonne_S">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-8 mp0">bilan<br>mrg</div>
+                        <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_modifs('bilan_mrg', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_modifs('bilan_mrg', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </th>
+
+            <th class="colonne_M">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-8 mp0">1 Clic<br>bilan</div>
+                        <div class="col-sm-4 mp0">
+
+                             <span class="inline_block">
+                                <section ng-click="clic_tri_modifs('bilan_mrg_clc', 'up')">
+                                    <ng-md-icon icon='keyboard_arrow_up' class='ng_ico'></ng-md-icon>
+                                </section>
+                                <section ng-click="clic_tri_modifs('bilan_mrg_clc', 'down')">
+                                    <ng-md-icon icon='keyboard_arrow_down' class='ng_ico'></ng-md-icon>
+                                </section>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </th>
+        </tr>
+        <tr
+            ng-repeat="mdf in mdf.bd_aff | filter: mdf.flt | orderBy: tri_modifs.col : tri_modifs.desc as bd_modifs_filtree"
+            class="animated fadeIn"
+        >
+            <td>
+                <a  href="#"
+                   ng-click="aff_xy_mdf_bid(mdf, 'mdf')">
+                   {{mdf.IdCamp}}
+                </a>
+                <div  class="loader" ng-show="mdf.shw_id == 'loader'"></div>
+                <div class="mp0">
+                    <button class = "sml_btn" ng-click="voir_mdf_ou_bid(mdf,'mdf')" ng-show="mdf.shw_id == 'btn'">
+                       voir
+                    </button>
+                </div>
+            </td>
+
+            <td>{{mdf.Jeu}}</td>
+            <td>{{mdf.Regie}}</td>
+            <td>{{mdf.Camp}}</td>
+            <td class="bg_j"> {{(mdf.avg_mrg_avant/1).format(2)}}</td>
+            <td class="bg_v"> {{(mdf.Moy_mrg_clc_avt*100).format(2)}}</td>
+
+            <td class="td_date_mdf">
+                <a href="#" ng-click="set_flt_mdf(mdf)">
+                    {{clic_reduce_date(mdf, mdf.ng_model)}}
+                </a>
+            </td>
+
+            <td class="bg_v {{coul_2(0, 0.01, mdf.Moy_mrg_clc_aps - mdf.Moy_mrg_clc_avt ) }}">
+                {{ (mdf.Moy_mrg_clc_aps*100).format(2)}}
+            </td>
+            <td class="bg_j {{coul_2(0, 0.1, mdf.avg_mrg_apres - mdf.avg_mrg_avant) }}">
+                {{(mdf.avg_mrg_apres/1).format(2)}}
+            </td>
+
+            <td><!-- modifs cell of modif bd -->
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <span>
+                                <p ng-hide="mdf.ng_model" class="animated anm_mdf">
+                                    {{clic_reduce_mdf(mdf, mdf.ng_model)}}
+                                </p>
+                            </span>
+
+                            <span class="mp0">
+                                <p ng-show="mdf.ng_model" class="pre_wrap animated anm_mdf">{{mdf.Modif}}</p>
+                            </span>
+
+                        </div>
+                        <div class="col-sm-2 align_right mp0">
+                            <input
+                                type="checkbox"
+                                ng-model="mdf.ng_model"
+                                ng-click="clic_reduce_mdf(mdf, mdf.ng_model); clic_mdf_cls(mdf, mdf.ng_model);"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td class="bg_j {{coul_2(0, 5, mdf.bilan_mrg*100) }}">
+                <ng-md-icon icon="call_received" class="arrow_down"
+                            ng-show="aff_icon_modifs(mdf.bilan_mrg)=='down'"></ng-md-icon>
+                <ng-md-icon icon="call_made" class="arrow_up"
+                            ng-show="aff_icon_modifs(mdf.bilan_mrg)=='up'"></ng-md-icon>
+                <ng-md-icon icon="report_problem" class="arrow_error"
+                            ng-show="aff_icon_modifs(mdf.bilan_mrg)=='error'"></ng-md-icon>
+                {{(mdf.bilan_mrg*100).format(0)}}{{aff_pour_cent(mdf.bilan_mrg)}}
+            </td>
+            <td class="bg_v {{coul_2(0, 5, mdf.bilan_mrg_clc*100) }}">
+                <ng-md-icon icon="call_received" class="arrow_down"
+                            ng-show="aff_icon_modifs(mdf.bilan_mrg_clc*100)=='down' "></ng-md-icon>
+                <ng-md-icon icon="call_made" class="arrow_up"
+                            ng-show="aff_icon_modifs(mdf.bilan_mrg_clc*100)=='up' "></ng-md-icon>
+                <ng-md-icon icon="report_problem" class="arrow_error"
+                            ng-show="aff_icon_modifs(mdf.bilan_mrg_clc*100)=='error' "></ng-md-icon>
+                {{(mdf.bilan_mrg_clc*100).format(0)}}{{aff_pour_cent(mdf.bilan_mrg_clc)}}
+            </td>
+        </tr>
+    </table>
+</div>
+<br><br>
+                                                                                                                                                                                                                                                                                                                     

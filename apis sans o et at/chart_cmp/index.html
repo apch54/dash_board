@@ -1,0 +1,154 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //---------.----------
+        // get parameters from url
+        //---------.----------
+        function $_GET(param) {
+            var vars = {};
+            //console.log(location.href);
+            window.location.href.replace(location.hash, '').replace(
+                /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+                function(m, key, value) { // callback
+                    vars[key] = value !== undefined ? value : '';
+                }
+            );
+            if (param) {
+                return vars[param] ? vars[param] : null;
+            }
+            return vars;
+        }
+        //---------.----------
+        //quit error
+        //---------.----------
+        var bye = function(txt) {
+            alert(txt);
+        }
+
+        //---------.----------
+        // set parameters for php url
+        //---------.----------
+        var $_GET = $_GET(),
+            base = $_GET['base'],
+            dt1 = $_GET['dt1'],
+            dt2 = $_GET['dt2'],
+            id = $_GET['id']
+        var url_param = '',
+            titre = '';
+        if (id != null) {
+            url_param = "?id=" + id;
+            titre = 'id = ' + id;
+            if (base != null) {
+                url_param = url_param + "&base=" + base;
+                titre = 'Base = ' + base + ' ; ' + titre;
+            } else {
+                titre = 'Base = m' + ' ; ' + titre;
+            }
+            if (dt1 != null) {
+                url_param = url_param + "&dt1=" + dt1;
+                titre = titre + ' ; dt1 = ' + dt1;
+            }
+            if (dt2 != null) {
+                url_param = url_param + "&dt2=" + dt2;
+                titre = titre + ' ; dt2 = ' + dt2;
+            }
+            //console.log( url_param);
+            draw();
+        } else {
+            bye(' id is compulsory. Please add it in url');
+        }
+
+        //---------.----------
+        // prepare chart
+        //---------.----------
+        function draw() {
+            google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+
+                var jsonData = $.ajax({
+                    url: "t_marges.php" + url_param,
+                    dataType: "json",
+                    async: false,
+                    success: function() {
+                        console.log('sucess ajax');
+                    },
+                    error: function() {
+                        $('#info').text('Error  : check url parameters...');
+                    }
+                }).responseText; //);
+                //console.log (jsonData, '-------------------');
+                jsn = jQuery.parseJSON(jsonData);
+
+                var tbl = [];
+                jsn.forEach(function(el) {
+                    tbl.push([new Date(el.date), Number(el.marge)]);
+                });
+
+                var data = new google.visualization.DataTable();
+                data.addColumn('date', 'Date');
+                data.addColumn('number', 'Marge');
+                data.addRows(tbl);
+
+                var options = {
+                    title: titre,
+                    titleTextStyle: {
+                        color: '#00f',
+                        bold: true
+                    },
+                    curveType: 'function',
+                    legend: 'none',
+                    lineWidth: 2,
+                    series: {
+                        0: {
+                            color: '#0065ff'
+                        }
+                    },
+                    hAxis: {
+                        title: 'Période',
+                        format: 'd-MM',
+                        gridlines: {
+                            color: '#ccc'
+                        }
+                    },
+                    vAxis: {
+                        title: 'Marge en €'
+                    },
+                    crosshair: {
+                        color: '#000',
+                        trigger: 'selection'
+                    },
+                    trendlines: {
+                        0: {
+                            type: 'linear',
+                            color: '#aaa',
+                            opacity: .5
+                        }
+                    },
+                    chartArea: {
+                        backgroundColor: {
+                            stroke: '#ccc',
+                            strokeWidth: 2
+                        }
+                    }
+                };
+                var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                chart.draw(data, options);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="info"></div>
+    <div id="curve_chart" style="width: 590px; height: 364px"></div>
+</body>
+
+</html>

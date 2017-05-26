@@ -1,0 +1,135 @@
+<!--  -------------------- -->
+<!--  Effet de levier      -->
+<!--  -------------------- -->
+
+<!-- un scroll fade in ou out -->
+<div    class="container-fluid menu-show-hide"
+        ng-show="chk_aff_levier"
+>
+
+    <h2 class="milieu">Classement des jeux par marge ou rentabilité (-Marge/Coût)[{{bd_glob[3].Date}}]</h2>
+    <br>
+    <!--place du lgs : visualisation des  données -->
+    <div class="contenair_log_title">
+        <div class="milieu">
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs:
+                <input type="checkbox" ng-model="logs.chk.levier">
+            </div>
+        </div>
+    </div>
+    <!-- fin du  log -->
+
+
+    <div class='row mp0'>
+        <div class="col-sm-6" id="id_levier_1">
+            <h3 class="centrer">Jeux ( Marge & Renta) sur la période Dt1 à Dt2</h3>
+
+            <!-- début aff log -->
+            <div ng-show="logs.chk.levier">
+                <div ng-repeat="x10 in bd_levier track by $index"
+                     class="align_left" ;
+                >
+                    <p ng-class-odd="'odd'" ng-class-even="'even'">
+                        {{x10}}
+                    </p>
+                </div>
+                <br>
+            </div>
+            <!-- fin aff  log -->
+
+            <form>
+                <table id="id_levier_t1">
+                    <tr>
+                        <th class="bg_m" width="55%">
+                            <a href="" ng-click="clic_tri_lev('Jeu')" class="thtb">Jeux </a>
+                            &nbsp; &nbsp;
+                            <!-- pop over help -->
+                            <a ng-href=""
+                               uib-popover="{{M_help.levier.content}}"
+                               popover-placement="right"
+                               popover-title="{{M_help.levier.title}}"
+                               popover-trigger="mouseenter"
+                            >
+                                <ng-md-icon icon="help" class="icon" size="24"></ng-md-icon>
+                            </a>
+                        </th>
+                        <th class="bg_m">
+                            <a href="" ng-click="clic_tri_lev('Marge')" class="thtb">Marge </a>
+                        </th>
+                        <th class="bg_m">
+                            <a href="" ng-click="clic_tri_lev('Renta')" class="thtb">Renta </a>
+                        </th>
+                    </tr>
+
+                    <tr ng-repeat=" le in  bd_levier | orderBy: tri_levier.col : tri_levier.desc as bd_levier_filtree">
+                        <td>
+                            <a href="" ng-click="get_bd_regie_jeu(le.Jeu);change_scope(chk_aff_levier,'id_levier',bzg.lev-120 )"                               lass="thtb"> {{le.Jeu}}
+                            </a>
+                        </td>
+
+                        <td class="{{coul_2(0, 5, le.Marge)}}">
+                            {{le.Marge.format()}}
+                        </td>
+
+                        <td class="{{coul_2(0, 5, le.Renta)}}">
+                            {{ (le.Renta).format(2) }}
+                        </td>
+
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div class="col-sm-6" id="id_levier_2">
+
+            <h3 class="centrer">Régie(s) associée(s) au jeu {{bd_regie_jeu[0].Jeu}}</h3>
+            <!-- début aff log -->
+            <div ng-show="logs.chk.levier">
+                <div class="logs_title_base"> Base : bd_régie_jeux</div><!-- Nom de la base comme titre-->
+                <div ng-repeat="x11 in bd_regie_jeu track by $index"
+                     class="align_left" ;
+                >
+                    <p ng-class-odd="'odd'" ng-class-even="'even'">
+                        {{x11}}
+                    </p>
+                </div>
+                <br>
+            </div>
+            <!-- fin aff  log -->
+
+            <form>
+                <table id="id_levier_t2">
+                    <tr>
+                        <th class="bg_j" width="30%">
+                            <a href="" ng-click="clic_tri_lev_regie('Camp')" class="thtb">Camp</a>
+                        </th>
+                        <th class="bg_j" width="30%">
+                            <a href="" ng-click="clic_tri_lev_regie('Regie')" class="thtb">Regie</a>
+                        </th>
+                        <th class="bg_j">
+                            <a href="" ng-click="clic_tri_lev_regie('Marge')" class="thtb">Marge </a>
+                        </th>
+                        <th class="bg_j">
+                            <a href="" ng-click="clic_tri_lev_regie('Renta')" class="thtb">Renta </a>
+                        </th>
+                    </tr>
+                    <tr ng-repeat=" re in  bd_regie_jeu  | orderBy: tri_levier_regie.col : tri_levier_regie.desc ">
+                        <td> {{re.Camp}}</td>
+                        <td> {{re.Regie}}</td>
+
+                        <td class="{{coul_2(0, 5, re.Marge)}}">
+                            {{re.Marge.format() }}
+                        </td>
+
+                        <td class="{{coul_2(0, 5, re.Renta)}}">
+                            {{ re.Renta.format(2) }}
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <br> <br> <br>
+        </div>
+    </div>
+
+</div>

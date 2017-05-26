@@ -1,0 +1,263 @@
+<!--  2015-11-25  -->
+
+<div class="container-fluid mp0 menu-show-hide"
+     id="id_containair_pie"
+     ng-controller="ctl_graph_pie"
+     ng-cloak
+>
+    <section ng_show="disp_pie_menu()">
+        <div>
+            <!--{{dddr}}<br> {{ bd_graph_campagnes}} -->
+            <h2 id="id_pie_title">
+                Marges des jeux, régies ou campagnes,
+                du &nbsp; {{date_to_string (date_0)}} au {{date_to_string(date_2)}}
+                {{titre1}} <!-- dv ou dp -->
+            </h2>
+        </div>
+
+        <div class="row">
+
+            <!--  -------------------- -->
+            <!--  pie tools            -->
+            <!--  -------------------- -->
+
+            <div class="col-sm-3">
+                <form name="radio_dv_ou_dp" id="id_pie_rdio" ng-click="change_dv()">
+                    <input type="radio" ng-model="rdio_dv" value="v" ng-focus="set_cursor('wait')">dv
+                    <input type="radio" ng-model="rdio_dv" value="p" ng-focus="set_cursor('wait')">dp
+                    <input type="radio" ng-model="rdio_dv" value="w" ng-focus="set_cursor('wait')">w
+                    <input type="radio" ng-model="rdio_dv" ng-focus="set_cursor('wait')" value="m">m
+                    <input type="radio" ng-model="rdio_dv" ng-focus="set_cursor('wait')" value="o" >o
+                    <input type="radio" ng-model="rdio_dv" ng-focus="set_cursor('wait')" value="at" >at
+                </form>
+            </div>
+            <div class="col-sm-3"><!-- choix dates -->
+
+                <form>
+                    <select id="ttr1" name="dteSelect" class="dte" ng-model="dte_select"
+                            ng-change="change_dte_select(dte_select)"/>
+
+                    <option value=""> Choix période</option>
+                    <option value="j"> J : dernière maj</option>
+                    <option value="j-1"> J-1</option>
+                    <option value="j7"> 7 jours précédents</option>
+                    <option value="j30"> 30 jours précédents</option>
+                    <option value="mois"> Le mois en cours</option>
+                    <option value="mois-1"> Le mois précédent</option>
+                    <option value="tout"> Tout</option>
+
+                    </select><br>
+                </form>
+            </div>
+
+            <div class="col-sm-2 align_right"><!-- choix dates manuel ------------ -->
+                    <!--<label for="ttl"> TODO effacer le 23-07
+                        <button ng-click="change_D0() ; set_cursor('dte')">
+                            de :
+                        </button>
+
+                    </label>
+                    -->
+                    <input id="ttl" class="dte" ng-model="date_0" type="date">
+            </div>
+
+            <div class="col-sm-2 milieu" >
+                <button class="center_div" ng-click="change_2_dates() ; set_cursor('dte')">
+                    Maj
+                </button>
+            </div>
+
+            <div class="col-sm-2 align_left">
+                    <!--<label for="ttl2"> TODO effacer le 23-07
+                        <button ng-click="change_D2() ; set_cursor('dte')">
+                            à :
+                        </button>
+                    </label>
+                    -->
+                    <input id="ttl2" class="dte" ng-model="date_2" type="date">
+            </div>
+        </div>
+    </section>
+    <!--  end tools -->
+
+
+    <!-- début du  log : affichage de données-->
+
+    <div class="contenair_log_title">
+        <div class="milieu">
+            <div class="inline_block logs_title" ng-show="logs.show">
+                Lgs:
+                <input type="checkbox" ng-model="logs.chk.pie">
+            </div>
+        </div>
+    </div>
+
+    <!-- début du  log : affichage de données-->
+
+    <div id="id_aff_graph_jeux_regies" class="row" ng-show="chk_aff_graph_jeux_regies" ng-cloak>
+
+        <!--  -------------------- -->
+        <!--  pies jeux et régies  -->
+        <!--  -------------------- -->
+
+        <!-- graphique de gauche -->
+        <div class="col-xs-12 col-sm-6" id="id_pie_sous_titre_1" width="100%" ng-cloak>
+            <div class="contenair_h3_regies">
+                <h3 id="id_pie_h31">Marges relatives aux jeux</h3>
+           </div>
+            <!-- début aff log -->
+            <div ng-show="logs.chk.pie">
+                <div class="logs_title_base"> Base : bd_graph_jeux </div><!-- Nom de la base comme titre-->
+
+                <div ng-repeat="x7 in bd_graph_jeux track by $index"
+                     class="align_left" ;
+                >
+                    <p ng-class-odd="'odd'" ng-class-even="'even'">
+                        {{x7}}
+                    </p>
+                </div>
+                <br>
+            </div>
+            <!-- fin aff  log -->
+
+            <div id="chart_pie_jeux">
+                <h2> En cours de chargement pour le dessin du pie</h2></div>
+        </div>
+
+        <!-- graphique de droite -->
+        <div class="col-xs-12 col-sm-6" id="id_pie_sous_titre_2" width="100%" ng-cloak>
+            <div class="contenair_h3_regies">
+                <h3 id="id_pie_h32">Marges relatives aux régies</h3>
+            </div>
+            <!-- début aff log -->
+            <div ng-show="logs.chk.pie">
+                <div class="logs_title_base"> Base : bd_graph_regies </div><!-- Nom de la base comme titre-->
+                <div ng-repeat="x8 in bd_graph_regies track by $index"
+                     class="align_left" ;
+                >
+                    <p ng-class-odd="'odd'" ng-class-even="'even'">
+                        {{x8}}
+                    </p>
+                </div>
+                <br>
+            </div>
+
+            <div id="chart_pie_regies">
+            </div>
+        </div>
+        <!-- fin aff  log -->
+
+    </div>
+
+    <!--  ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ * -->
+    <!--  pie campagnes               * -->
+    <!--  ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ * -->
+
+    <br>
+    <!-- {{bd_camp_neg}} <br><br>{{bd_camp_small}} -->
+    <section class="z_inherit"
+             id="id_aff_graph_campagnes"
+             ng-show="chk_aff_graph_campagnes"
+             ng-cloak
+    >
+
+        <h3 class="centrer"> Marges relatives aux campagnes</h3>
+
+        <!-- début aff log -->
+        <div ng-show="logs.chk.pie">
+            <div class="logs_title_base"> Base : bd_graph_campagnes </div><!-- Nom de la base comme titre-->
+            <div ng-repeat="x9 in bd_graph_campagnes track by $index"
+                 class="align_left" ;
+            >
+                <p ng-class-odd="'odd'" ng-class-even="'even'">
+                    {{x9}}
+                </p>
+            </div>
+            <br>
+        </div>
+        <!-- fin aff  log -->
+
+
+        <div ng-cloak id="id_choose_sml_camp" >
+            <form name="radio_dv_ou_dp" class="line_height_2">
+                Petites campagnes ;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                niveau <
+                <input type="number"
+                       class="width_3"
+                       ng-model="niveau_petites_camp"
+                       ng-change="change_PC(niveau_petites_camp)"
+                       placeholder="inf à"
+                       min="0" max="10"
+                > % ; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Liste : <input type="checkbox" ng-model="chk_aff_lst_small">
+            </form>
+        </div>
+
+        <div id="chart_pie_campagnes"></div>
+
+        <div ng-show="chk_aff_lst_small">
+
+            <div class='row mp0'>
+                <div class="col-sm-6 small_camp_2">
+                    <h3 align="center"> Campagnes affichant : {{small_name}} </h3><br>
+
+                    <!-- @formatter:off -->
+                    <div class='row mp0'>
+                        <div class="col-sm-1 small_camp_3"> &nbsp;</div>
+                        <div class="col-sm-6  small_camp_4"><h4>Campagne</h4></div>
+                        <div class="col-sm-2  small_camp_4"><h4>Marge</h4></div>
+                        <div class="col-sm-2 small_camp_4 align_right"><h4> Renta</h4></div>
+                        <div class="col-sm-1 small_camp_5"> &nbsp;   </div>
+                    </div>
+
+                    <div ng-repeat="x in bd_camp_small | orderBy : '-Marge' track by $index">
+                        <div class='row mp0'>
+                            <div class="col-sm-1 small_camp_5">
+                                &nbsp;                    </div>
+                            <div class="col-sm-6" small_camp_5 > {{x.Name}}</div>
+                            <div class="col-sm-2  small_camp_5">
+                                {{x.Marge.format(0)}}€
+                            </div>
+                            <div class="col-sm-2  small_camp_5 align_right">
+                                {{x.Renta.format(2)}}
+                            </div>
+                            <div class="col-sm-1  small_camp_5"> &nbsp; </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 small_camp_2">
+                    <h3 align="center" class = "red"> Campagnes affichant une marge < 0 </h3><br>
+
+                    <div class='row mp0'>
+                        <div class="col-sm-1 small_camp_3"> &nbsp; </div>
+                        <div class="col-sm-6 small_camp_4" ><h4 class="red">Campagne</h4></div>
+                        <div class="col-sm-2 small_camp_4"> <h4 class="red">Marge</h4></div>
+                        <div class="col-sm-2 small_camp_4 align_right" ><h4 class="red">Renta</h4></div>
+                        <div class="col-sm-1 small_camp_5" > &nbsp;  </div>
+                    </div>
+
+                    <div ng-repeat="x in bd_camp_neg | orderBy : 'Marge' track by $index">
+                        <div class='row mp0'>
+                            <div class="col-sm-1 small_camp_5"> &nbsp;</div>
+                            <div class="col-sm-6 small_camp_5">{{x.Name}}</div>
+                            <div class="col-sm-2 small_camp_5" >
+                                {{x.Marge.format(2)}}€
+                            </div>
+                            <div class="col-sm-2 small_camp_5 align_right" >
+                                {{x.Renta.format(2)}}
+                            </div>
+                            <div class="col-sm-1  small_camp_5" > &nbsp;</div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- @formatter:on -->
+            </div>
+        </div>
+    </section>
+
+    <br>
+</div>
+<!-- fluid -->

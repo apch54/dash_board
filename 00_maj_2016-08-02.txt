@@ -1,0 +1,80 @@
+2017-05-26
+ajout  bases o et at dans les graph pie et graph xy
+
+2017-05-24
+ajout  bases o et at dans les api marges et get1Cmp
+
+2016-08-02
+refonte de jointure sql light
+présentation du tableau sur changement des filtresMarges ... 4ème colonne
+
+
+216-08-01
+passage de parametre entre light et complète
+correction bug filtre marge (Infinite)
+changement jointure SQL version complète
+
+216-07-18
+sélecteurs de filtre à blancs au lieu des 10000
+
+2016-07-15
+correction des rentas pour les coûts 0
+
+2016-07-13
+bouton caché sous la 1ère colonne
+correction virgules menu
+
+2016-07-04
+bonne optimisation générale du scroll
+
+2016-07-01
+mise en place div blanche en syncho avec le menu
+amélioration du scroll
+prise en compte de m pour le dash board light : light.php
+amélioration du curseurmoulin bilan
+correction de bugs mineurs
+
+2016-06-29
+mise en place de la base m
+
+112016-06-26
+prise en compte des nouveaux répertoires last working
+
+2016-06-23
+api interval
+correction de bugs mineurs
+
+2016-06-20
+help menu dynamique
+correction bug logs
+
+2016-06-17
+bilan =on : choix d'affichage du bilan au niveau de l'url
+smooth-scroll
+
+2016-06-11
+correction bug :
+recadrage du tableau quand on ferme les modifs
+crv ou bid
+correction de bugs mineurs
+
+2016-06-10
+optimisation xy = off
+
+2016-06-09
+url?xy = off
+factorisation ds php 04 10 et 11
+changegements couleurs.js
+
+2016-06-06
+URL logs=on permet d'afficher ts les logs ; les donneés
+brutes des bases de données
+
+2016-05-27
+affichge des crv des bid et 
+la possibilité conjointe des deux affichages
+
+2016-05-12
+préparation intégration xy des modifs conjointes 
+cvr et bid
+

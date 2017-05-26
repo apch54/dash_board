@@ -1,0 +1,362 @@
+<!-- ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *-->
+<!-- affichage de la table                                                     -->
+<!-- 2015-08-02                                                                 -->
+<!-- ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *-->
+<br><br>
+<h2 class ="milieu" id="id_titre_tableau">
+    <br>{{url_param}}
+    {{gbd_filtree.length}}&nbsp;
+    items en ligne ; une marge partielle de
+    <span class="{{coul_2(0, 50, sum_col('Marge'), 'red', 'maroon')}}"> {{sum_col('Marge').toFixed(0)}}€</span>
+    sur une marge globale de
+        <span ng-model="marge_globale" class="{{coul_2(100, 1000, sum_global('Marge'))}}">
+            {{sum_global('Marge')}}€
+        </span> ;
+    soit :
+        <span class="{{coul_2(0, 10, sum_col('Marge') / sum_global('Marge') * 100)}}">
+        {{(sum_col('Marge') / sum_global('Marge') * 100).toFixed(0)}}%
+    </span>de l'ensemble.
+
+</h2>
+
+<!-- début aff  log -->
+<div class="contenair_log_title">
+    <div class="milieu">
+        <div class="inline_block logs_title" ng-show="logs.show">
+            Lgs base globale :
+            <input type="checkbox" ng-model="logs.chk.table">&nbsp;&nbsp;&nbsp;&nbsp;
+            Lgs base filtrée :
+            <input type="checkbox" ng-model="logs.chk.table_flt">
+        </div>
+    </div>
+</div>
+
+
+<div ng-show="logs.chk.table">
+<div class="logs_title_base"> Base : bd_glob</div><!-- Nom de la base comme titre-->
+<div ng-repeat="x14 in bd_glob track by $index"
+     class="align_left" ;
+>
+    <p ng-class-odd="'odd'" ng-class-even="'even'">
+        {{x14}}
+    </p>
+</div>
+<br>
+</div>
+
+<div ng-show="logs.chk.table_flt">
+<div class="logs_title_base"> Base : gbd_filtree</div><!-- Nom de la base comme titre-->
+<div ng-repeat="x14 in gbd_filtree track by $index"
+     class="align_left" ;
+>
+    <p ng-class-odd="'odd'" ng-class-even="'even'">
+        {{x14}}
+    </p>
+</div>
+<br>
+</div>
+<!-- fin aff  log -->
+
+    <section>
+     <!--
+        c'est un style qui fixe dynamiquement la largeur
+        de la page afin de prendre la place disponible
+        ne pas mettre ds le fichier css
+     -->
+    <table ng-show="true"
+
+           ng-style="{'width': tbl_w }"
+           class="center_div"
+           ng-mouseenter="show_hidden_table=true"
+           ng-mouseleave="show_hidden_table=false"
+    >
+        <!-- 1er header de table : synthèse  @formatter:off ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *-->
+        <tr>
+            <th>
+                <a ng-href=""
+                   uib-popover="{{M_help.tableau.content}}"
+                   popover-placement="right"
+                   popover-title="{{M_help.tableau.title}}"
+                   popover-trigger="mouseenter"
+                >
+                    <ng-md-icon icon="help" class="icon"></ng-md-icon>
+                </a>
+            </th>
+            <th> &nbsp;                                                                         </th>
+            <th> &nbsp;                                                                         </th>
+            <th> &nbsp;                                                                         </th>
+            <th class="bg_m">{{(sum_col('TjCout') / sum_col('TjClic') * 1000).toFixed(1)}}      </th>
+            <th class="bg_m"> {{sum_col('Transfo').toFixed(0) }}                                </th>
+            <th class="bg_m">${{(sum_col('Transfo') / sum_col('TjClic')*100).format(1)}}%       </th>
+            <th class="bg_m">${{(-sum_col('TjCout') / sum_col('Transfo')).toFixed(1)}}          </th>
+            <th class="bg_m">{{sum_col('TjClic')}}                                              </th>
+            <th class="bg_m">${{sum_col('TjCout').toFixed(0)}}                                  </th>
+            <th class="bg_m">{{sum_col('Gain').toFixed(0)}}€                                    </th>
+            <th> &nbsp;                                                                         </th>
+            <th> &nbsp;                                                                         </th>
+            <th class="bg_m">{{sum_col('Marge').toFixed(0)}}€                                   </th>
+            <th class="bg_m">{{(-(sum_col('Marge') / sum_col('TjCout') *1.2)).format(2)}}       </th>  <!-- renta -->
+            <th> <!--{{(sum_col('Contrib')).toFixed(1)}}%-->  %                                 </th>
+            <th class="bg_m">{{(sum_col('Marge') / sum_col('TjClic')*100).toFixed(2)}}c€        </th>
+
+        </tr>
+        <!-- @formatter:on ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *-->
+
+        <!-- 2ème  header de table  ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ * -->
+        <tr>
+            <th>
+                <span class='span_tbl'>id</span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('idCamp', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('idCamp', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+            <th><!-- pallier le pb de changement de jeu en cas de marge <-10 -->
+                <select name="regieSelect" class="thtb"
+                        ng-model="filtre.Regie"
+                        ng-change="change_select_tab ('Regie',filtre.Regie)"
+
+                >
+                    <option value="">Toutes régies</option>
+                    <option
+                        ng-repeat="r in bd_regies | orderBy : 'value'"
+                        ng-value="{{r.value}}"
+                    >{{r.value}}
+                    </option>
+                </select><br>
+            </th>
+            <th>
+                <select name="jeuxSelect"
+                        class="thtb"
+                        ng-model="filtre.Jeu"
+                        ng-change="change_select_tab ('Jeu',filtre.Jeu)"
+                >
+                    <option value="">Tous jeux</option>
+                    <option ng-repeat="j in bd_jeux  | orderBy : 'value'"
+                            value="{{j.value}}">{{j.name}}</option>
+                </select><br>
+            </th>
+            <th>
+                <select name="campSelect"
+                        class="thtb"
+                        ng-model="filtre.Camp"
+                        ng-change="change_select_tab ('Camp',filtre.Camp)"
+                >
+                    <option value="">Toutes camp</option>
+                    <option ng-repeat="c in bd_camp | orderBy : 'value'"
+                            value="{{c.value}}">{{c.name}}</option>
+                </select><br>
+            </th>
+
+            <th class="bg_v">
+                <span class='span_tbl'>CPM</span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('TjCPM', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('TjCPM', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_v">Transf</th>
+
+            <th class="bg_v">
+                <span class='span_tbl'>CVR</span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('TjCVR', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('TjCVR', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_v ">
+                <span class='span_tbl'>Bid</span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('TjBid', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('TjBid', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_v ">
+                <span class='span_tbl'>Clic</span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('TjClic', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('TjClic', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_v">
+                <span class='span_tbl'>Coût</span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('TjCout', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico'></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('TjCout', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th
+            >
+            <th class="bg_b">
+                <span class='span_tbl'>Gain</span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('Gain', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico' ></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('Gain', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_b ">
+                <span class='span_tbl'>Login </span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('CtrLogin', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico' ></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('CtrLogin', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'   ></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_b ">
+            <span class='span_tbl'>Game </span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('CtrGame', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico' ></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('CtrGame', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico' ></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_v ">
+                <span class='span_tbl'>Marge </span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('Marge', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico'   ></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('Marge', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'  ></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_v ">
+                <span class='span_tbl'>Renta </span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('Renta', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico'  ></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('Renta', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico' ></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_v ">
+                <span class='span_tbl'>Contrib </span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('Contrib', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico' ></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('Contrib', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'  ></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+            <th class="bg_v ">
+                <span class='span_tbl'>1 Clic  </span>
+                <span class ="inline_block">
+                    <section ng-click="clic_tri_col_simple('Val_1_clic', 'down')">
+                        <ng-md-icon icon='keyboard_arrow_up'   class = 'ng_ico'  ></ng-md-icon>
+                    </section>
+                    <section ng-click="clic_tri_col_simple('Val_1_clic', 'up')">
+                        <ng-md-icon icon='keyboard_arrow_down' class = 'ng_ico'></ng-md-icon>
+                    </section>
+                </span>
+            </th>
+
+        </tr>
+
+        <!--corps de table  ¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *-->
+         <!--ngclipboard  ngclipboard  data-clipboard-target={{"#idc"+x.idCamp}}
+          filter : TjCPM_inf |filter : Gain_sup |filter : is_id | filter : Renta_inf |
+         -->
+
+        <tr ng-model="tri" ng-copyable id={{'idc'+x.idCamp}}
+            ng-repeat=" x in  bd_glob | filter : filtre |   filter : Marge_sup | orderBy: tri.col : tri.desc as gbd_filtree track by x.idCamp"
+        >
+            <td>
+                <a  href="#" ng-click="fill_hidden_table(x)"   >
+                    {{ x.idCamp }}
+                </a>
+            </td>
+            <td>{{x.Regie}}</td>
+            <td>{{x.Jeu}}</td>
+            <td>{{x.Camp}}</td>
+            <td class="bg_v"> {{x.TjCPM}}</td>
+            <td class="bg_v">{{x.Transfo}}</td>
+            <td class="bg_v">{{(x.Transfo/x.TjClic * 100).format(2) }}</td>
+            <td class="bg_v">{{x.TjBid}}</td>
+            <td class="bg_v {{coul_2(200, 500, x.TjClic)}}" > {{x.TjClic}} </td>
+            <td class="bg_v"> {{x.TjCout}}</td>
+            <td class="bg_b"> {{x.Gain}}</td>
+            <td class="bg_b"> {{x.CtrLogin}}</td>
+            <td class="bg_b"> {{x.CtrGame}}</td>
+            <td class="bg_j {{coul_2(0, 5, x.Marge)}}" > {{x.Marge}}</td>
+            <td class="bg_j {{coul_2(0, .5, x.Renta)}}">{{(1*x.Renta).format(2)}}</td>
+            <td class="bg_j"> {{(x.Marge/ sum_col('Marge')*100).format(2)}}</td>
+            <td class="bg_j {{coul_2(0, 1, x.Val_1_clic)}}" > {{x.Val_1_clic}}</td>
+        </tr>
+
+        <!--Synthèse - @formatter:off¨¨¨¨¨¨¨¨¨¨¨¨ ~ ¨¨¨¨¨¨¨¨¨¨¨¨ *-->
+        <tr>
+            <th> &nbsp;                                                                             </th>
+            <th> &nbsp;                                                                             </th>
+            <th> &nbsp;                                                                             </th>
+            <th> &nbsp;                                                                             </th>
+            <th class="bg_m"> {{(sum_col('TjCout') / sum_col('TjClic') * 1000).toFixed(1)}}         </th>
+            <th class="bg_m"> {{sum_col('Transfo').toFixed(0) }}                                    </th>
+            <th class="bg_m"> {{(sum_col('Transfo') / sum_col('TjClic')*100).format(1)}}%           </th>
+            <th class="bg_m"> ${{(-sum_col('TjCout') / sum_col('Transfo')).toFixed(1)}}             </th>
+            <th class="bg_m"> {{sum_col('TjClic')}}                                                 </th>
+            <th class="bg_m"> ${{sum_col('TjCout').toFixed(0)}}                                     </th>
+            <th class="bg_m"> {{sum_col('Gain').toFixed(0)}}€                                       </th>
+            <th>-                                                                                   </th>
+            <th>-                                                                                   </th>
+            <th class="bg_m">{{sum_col('Marge').toFixed(0)}}€                                       </th>
+            <th class="bg_m">{{(-(sum_col('Marge') / sum_col('TjCout') *1.2)).format(2)}}           </th>
+            <th>%                                                                                   </th>
+            <th class="bg_m">{{(sum_col('Marge') / sum_col('TjClic')*100).toFixed(2)}}c€            </th>
+
+            <th ng-show={{false}}>{{when_last('from table')}}</th> <!-- a ghost  td for insering a funct -->
+        </tr>
+    </table><!-- @formatter:on-->
+    <br>
+    <!---->
+    <h2 class="milieu"  ng-show="raz_if_bd_empty()">
+        &nbsp;
+    </h2>
+</section>

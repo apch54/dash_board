@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.1.3.2 (Windows)"/>
+	<meta name="created" content="2009-04-16T11:32:02"/>
+	<meta name="changed" content="2016-06-27T10:32:20.408000000"/>
+	<meta name="Info 1" content=""/>
+	<meta name="Info 2" content=""/>
+	<meta name="Info 3" content=""/>
+	<meta name="Info 4" content=""/>
+	<style type="text/css">
+		@page { margin-left: 1.2cm; margin-right: 1.2cm; margin-top: 1.2cm; margin-bottom: 1.3cm }
+		p { margin-left: 1cm; margin-bottom: 0.3cm; direction: ltr; color: #00000a; line-height: 100%; text-align: left; orphans: 0; widows: 0 }
+		p.western { font-family: "Droid Sans", serif; font-size: 12pt; so-language: zxx; font-weight: normal }
+		p.cjk { font-family: "Andale Sans UI"; font-size: 12pt; so-language: zxx; font-weight: normal }
+		p.ctl { font-family: "Tahoma"; font-size: 12pt; so-language: zxx }
+		h1 { margin-bottom: 0.21cm; direction: ltr; color: #3333ff; text-align: center; orphans: 0; widows: 0 }
+		h1.western { font-family: "Droid Serif", sans-serif; font-size: 16pt; so-language: zxx }
+		h1.cjk { font-family: "Segoe UI"; font-size: 16pt; so-language: zxx }
+		h1.ctl { font-family: "Tahoma"; font-size: 16pt; so-language: zxx }
+		h2 { margin-top: 0.4cm; margin-bottom: 0.2cm; direction: ltr; color: #3333ff; line-height: 100%; text-align: left; orphans: 0; widows: 0 }
+		h2.western { font-family: "Droid Serif", sans-serif; font-size: 12pt; so-language: zxx; font-weight: normal }
+		h2.cjk { font-family: "Andale Sans UI"; font-size: 12pt; so-language: zxx; font-weight: normal }
+		h2.ctl { font-size: 14pt; so-language: zxx; font-weight: normal }
+		a.western:link { font-family: "Droid Serif", serif; so-language: zxx }
+		a.cjk:link { so-language: zxx }
+		a.ctl:link { so-language: zxx }
+	</style>
+</head>
+<body lang="en-US" text="#00000a" dir="ltr">
+<p lang="zxx" class="western" style="margin-left: 0cm; font-weight: normal; line-height: 100%"><a name="docs-internal-guid-bc9862e8-039e-b979-ee55-2c63aedd093c"></a>
+<br/>
+<br/>
+
+</p>
+<h1 lang="zxx" class="western" align="center" style="margin-left: 0.5cm; orphans: 0; widows: 0; page-break-after: avoid">
+<font color="#3333ff"><span lang="zxx"><b>Utilisation de l'API :
+get1Cmp</b></span></font></h1>
+<p lang="zxx" class="western" style="margin-left: 0cm; line-height: 100%">
+<br/>
+<br/>
+
+</p>
+<ol>
+	<li/>
+<h2 lang="zxx" class="western"> interrogation de base : ?base
+	= dv&amp;Interval=10&amp;idCamp=91</h2>
+</ol>
+<p lang="zxx" class="western"><a class="western" href="http://gamisio.com/xyz_new5/apis/get1Cmp.php?base=dv&amp;interval=10&amp;idCmp=91"><span lang="zxx"><span style="font-weight: normal">http://gamisio.com/xyz_new5/apis/get1Cmp.php?base=dv&amp;interval=10&amp;idCmp=91</span></span></a></p>
+<p lang="zxx" class="western"><br/>
+<br/>
+
+</p>
+<p lang="zxx" class="western"><span lang="zxx"><span style="font-weight: normal">retour
+ &nbsp;<br/>
+</span></span>[{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&quot;req&quot;:
+&quot;==&gt; base =_dv &nbsp;#&nbsp; idCmp = 91 &nbsp;#&nbsp; dt1 =
+2016-06-14 &nbsp;#&nbsp; dt2 = 2016-06-23&quot;,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&quot;idCamp&quot;:
+&quot;91&quot;,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&quot;regie&quot;: &quot;TJ&quot;,
+<span lang="zxx">   ...</span></p>
+<p lang="zxx" class="western" style="font-weight: normal"><br/>
+<br/>
+
+</p>
+<ol start="2">
+	<li/>
+<h2 lang="zxx" class="western"><font color="#3333ff"><font size="3" style="font-size: 12pt"><span lang="zxx"><span style="font-weight: normal">Interrogation
+	sur dates : ...dt2=2016-01-03&amp;dt1=2016-01-01...</span></span></font></font></h2>
+</ol>
+<p lang="zxx" class="western" align="left" style="line-height: 100%; orphans: 0; widows: 0">
+
+<font color="#000080"><font face="Droid Serif, serif"><font size="3" style="font-size: 12pt"><span lang="zxx"><u><span style="font-weight: normal">http://gamisio.com/xyz_new5/apis/get1Cmp.php?base=dv&amp;dt2=2016-01-03&amp;dt1=2016-01-
+ 01&amp;idCmp=91</span></u></span></font></font></font></p>
+<p lang="zxx" class="western" align="left" style="line-height: 100%; orphans: 0; widows: 0">
+<br/>
+<br/>
+
+</p>
+<p lang="zxx" class="western">retour</p>
+<p lang="zxx" class="western" align="left" style="line-height: 100%; orphans: 0; widows: 0">
+[{<br/>
+		&quot;req&quot;: &quot;==&gt; base =_dv &nbsp;#&nbsp; idCmp
+= 91 &nbsp;#&nbsp; dt1 = 2016-01-01 &nbsp;#&nbsp; dt2 =
+2016-01-03&quot;,<br/>
+		&quot;idCamp&quot;: &quot;91&quot;,<br/>
+		&quot;regie&quot;:
+&quot;TJ&quot;, ...</p>
+<p lang="zxx" class="western"><br/>
+<br/>
+
+</p>
+<ol start="3">
+	<li/>
+<h2 lang="zxx" class="western">Interrogation mixte : date et
+	Interval 
+	</h2>
+</ol>
+<p lang="zxx" class="western"><font color="#0000ff"><font size="3" style="font-size: 12pt"><span lang="zxx"><span style="font-weight: normal">	</span></span></font></font><span lang="zxx">C'est
+interval qui est  pris en compte, les dates sont ignor&eacute;es.</span></p>
+<p lang="zxx" class="western">	Exemple:</p>
+<p lang="zxx" class="western"><span lang="zxx">	</span><font color="#000080"><font face="Droid Serif, serif"><font size="3" style="font-size: 12pt"><span lang="zxx"><u><span style="font-weight: normal">http://gamisio.com/xyz_new5/apis/get1Cmp.php?base=dv&amp;dt2=2016-01-03&amp;dt1=2016-01-	01&amp;idCmp=91&amp;interval=10</span></u></span></font></font></font></p>
+<p lang="zxx" class="western"><br/>
+<br/>
+
+</p>
+<p lang="zxx" class="western">	retour :</p>
+<p lang="zxx" class="western"><span lang="zxx">	[{<br/>
+		&quot;req&quot;:
+&quot;==&gt; base =_dv &nbsp;#&nbsp; idCmp = 91 &nbsp;#&nbsp; dt1 =
+2016-06-14 &nbsp;#&nbsp; dt2 = 2016-06-23&quot;,<br/>
+		&quot;idCamp&quot;:
+&quot;91&quot;,<br/>
+		&quot;regie&quot;: &quot;TJ&quot;,<br/>
+
+		&quot;jeu&quot;: &quot;CHALK-CHALLENGE&quot;, </span>
+</p>
+<p lang="zxx" class="western">	c'est bien l'interval qui est pris en
+compte</p>
+<p lang="zxx" class="western">	</p>
+<p lang="zxx" class="western">Si l'interval et une date sont omises ,
+la requ&ecirc;te est effectu&eacute;e &agrave; la date dddr: exemple
+: 
+</p>
+<p lang="zxx" class="western" style="font-weight: normal"><font color="#000080"><font face="Droid Serif, serif"><font size="3" style="font-size: 12pt"><u>http://gamisio.com/xyz_new5/apis/get1Cmp.php?idCmp=91</u></font></font></font></p>
+<p lang="zxx" class="western"><br/>
+<br/>
+
+</p>
+<p lang="zxx" class="western">retour</p>
+<p lang="zxx" class="western">[{<br/>
+		&nbsp;&quot;req&quot;: &quot;==&gt;
+base =_dv &nbsp;#&nbsp; idCmp = 91 &nbsp;#&nbsp; dt1 = 2016-06-23 &nbsp;#&nbsp;
+dt2 = 2016-06-23&quot;,<br/>
+		&quot;idCamp&quot;: &quot;91&quot;,<br/>
+		&quot;regie&quot;:
+&quot;TJ&quot;,<br/>
+		&quot;jeu&quot;: &quot;CHALK-CHALLENGE&quot;, 
+</p>
+<p lang="zxx" class="western" align="left" style="margin-left: 1.2cm; line-height: 100%">
+<br/>
+<br/>
+
+</p>
+<ol start="4">
+	<li/>
+<h2 lang="zxx" class="western" align="left" style="orphans: 0; widows: 0; page-break-after: avoid">
+	Retour d'un param&egrave;tre unique : ...&amp;param=renta</h2>
+</ol>
+<p lang="zxx" class="western" align="left" style="margin-left: 0cm; line-height: 100%">
+<font size="3" style="font-size: 12pt"><span style="font-weight: normal">	Il
+est possible de ne retourner qu' un seul champ de la requ&ecirc;te;
+exemple</span></font></p>
+<p lang="zxx" class="western"><font color="#000080"><font face="Droid Serif, serif"><span lang="zxx"><u><a class="western" href="http://gamisio.com/xyz_new5/apis/get1Cmp.php?idCmp=91&amp;param=renta">http://gamisio.com/xyz_new5/apis/get1Cmp.php?idCmp=91&amp;param=renta</a></u></span></font></font></p>
+<p lang="zxx" class="western"><br/>
+<br/>
+
+</p>
+<p lang="zxx" class="western"><font color="#00000a"><font size="3" style="font-size: 12pt"><span lang="zxx"><span style="font-weight: normal">retour</span></span></font></font><font size="3" style="font-size: 12pt"><span style="font-weight: normal">:
+ </span></font>
+</p>
+<p lang="zxx" class="western"><span style="font-variant: normal"><font color="#000000"><font face="Times New Roman, serif"><font size="4" style="font-size: 14pt"><span style="letter-spacing: normal"><span style="font-style: normal"><span style="font-weight: normal">'renta'
+: '-0.32'</span></span></span></font></font></font></span><font size="3" style="font-size: 12pt"><span style="font-weight: normal">
+</span></font>
+</p>
+<p lang="zxx" class="western" style="font-weight: normal"><br/>
+<br/>
+
+</p>
+<p lang="zxx" class="western"><font size="3" style="font-size: 12pt"><span style="font-weight: normal">les
+champs interrogeables sont :</span></font></p>
+<ul>
+	<li/>
+<p lang="zxx" class="western"> <font size="3" style="font-size: 12pt"><span style="font-weight: normal">camp</span></font></p>
+	<li/>
+<p lang="zxx" class="western"> <font size="3" style="font-size: 12pt"><span style="font-weight: normal">cout_dollard</span></font></p>
+	<li/>
+<p lang="zxx" class="western"> <font size="3" style="font-size: 12pt"><span style="font-weight: normal">CPM</span></font></p>
+	<li/>
+<p lang="zxx" class="western"> <font size="3" style="font-size: 12pt"><span style="font-weight: normal">CVR</span></font></p>
+	<li/>
+<p lang="zxx" class="western"> <font size="3" style="font-size: 12pt"><span style="font-weight: normal">ctr_game</span></font></p>
+	<li/>
+<p lang="zxx" class="western"> <font size="3" style="font-size: 12pt"><span style="font-weight: normal">ctr_login</span></font></p>
+	<li/>
+<p lang="zxx" class="western"> <font size="3" style="font-size: 12pt"><span style="font-weight: normal">gain_euro</span></font></p>
+	<li/>
+<p lang="zxx" class="western"> <font size="3" style="font-size: 12pt"><span style="font-weight: normal">jeu</span></font></p>
+	<li/>
+<p lang="zxx" class="western"> <font size="3" style="font-size: 12pt"><span style="font-weight: normal">marge</span></font></p>
+	<li/>
+<p lang="zxx" class="western"><font size="3" style="font-size: 12pt"><span style="font-weight: normal">regie</span></font></p>
+	<li/>
+<p lang="zxx" class="western"><font size="3" style="font-size: 12pt"><span style="font-weight: normal">renta</span></font></p>
+	<li/>
+<p lang="zxx" class="western"><font size="3" style="font-size: 12pt"><span style="font-weight: normal">val_1_clic</span></font></p>
+</ul>
+<ol start="5">
+	<li/>
+<h2 lang="zxx" class="western"><span lang="zxx">Points
+	</span><font color="#3333ff"><font size="3" style="font-size: 12pt"><span lang="zxx"><span style="font-weight: normal">particuliers</span></span></font></font></h2>
+</ol>
+<p lang="zxx" class="western" align="left">La  base de donn&eacute;e,peut
+&ecirc;tre omise, la base &quot;m&quot;  est utilis&eacute;e par
+d&eacute;faut.</p>
+<p lang="zxx" class="western" align="left">Toute incoh&eacute;rence
+au regard de la base provoquant un retour vide se manifeste par une
+erreur; par exemple un interval &lt;0.</p>
+<p lang="zxx" class="western" align="left"><br/>
+<br/>
+
+</p>
+<h2 lang="zxx" class="western">6  La page help</h2>
+<p lang="zxx" class="western" align="left">Cette page s'obtient en
+pla&ccedil;ant dans la ligne de commande  le parametre 'help'.</p>
+<p lang="zxx" class="western" align="left">Exemple:</p>
+<p lang="zxx" class="western" align="left"><font color="#000080"><font face="Droid Serif, serif"><span lang="zxx"><u><font size="3" style="font-size: 12pt"><span style="font-weight: normal">http://gamisio.com/xyz_new5/apis/get1Cmp.php?help</span></font></u></span></font></font></p>
+<p lang="zxx" class="western" align="left"><br/>
+<br/>
+
+</p>
+<div title="footer">
+	<p lang="zxx" style="margin-left: 0cm; margin-top: 0.89cm; margin-bottom: 0cm; font-weight: normal; line-height: 100%">
+	<br/>
+
+	</p>
+</div>
+</body>
+</html>
